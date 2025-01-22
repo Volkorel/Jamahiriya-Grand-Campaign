@@ -1,0 +1,63 @@
+﻿five_year_playable_pulse = {
+	on_actions = {
+		tab_oe_legions_pulse_effects
+	}
+	#events = {
+		#HM.0038
+		#HMWSG.0001
+	#}
+}	
+tab_oe_legions_pulse_effects = {
+	trigger = {
+		is_oe_imperial_government_trigger = yes
+		any_vassal = {
+			count > 8 #修正
+			is_legion_government_trigger = yes
+			opinion = {
+				target = root
+				value >= 0
+			}
+		}
+	}
+	effect = {
+		clear_variable_list = oe_legions_list
+		ordered_vassal = {
+			limit = {
+				is_legion_government_trigger = yes
+				opinion = {
+					target = root
+					value >= 0
+				}
+			}
+			order_by = gold	
+			max = 3
+			check_range_bounds = no
+			save_scope_as = legion_government_ally
+			root = {
+				add_to_variable_list = {
+					name = oe_legions_list
+					target = scope:legion_government_ally
+				}
+			}
+		}	
+	}	
+}
+oehm_on_legion_raise = {
+	effect = {
+		random_character_war = {
+			save_temporary_scope_as = temp_war
+		}
+		spawn_army = {
+			name = oe_legion_army_name
+			men_at_arms = {
+				type = china_centre_jj
+				stacks = 5
+			}
+			war = scope:temp_war
+			inheritable = no
+			uses_supply = yes
+			location = scope:target.capital_province
+		}
+		remove_short_term_gold = 50
+	}
+}

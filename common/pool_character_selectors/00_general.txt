@@ -1,0 +1,123 @@
+﻿pool_general = {
+	valid_character = {
+		is_capable_adult = yes
+		is_imprisoned = no
+
+		OR = {
+			culture = { has_cultural_pillar = heritage_chinese }
+			culture = { has_innovation = innovation_centralization_of_authority }
+			has_same_culture_as = scope:base
+			AND = {
+				exists = scope:base.primary_title.title_province.culture
+				culture = scope:base.primary_title.title_province.culture
+			}
+		}
+
+		trigger_if = {
+			limit = {
+				scope:base = { has_realm_law = female_only_law }
+			}
+			is_female = yes
+		}
+		trigger_if = {
+			limit = {
+				scope:base = { has_realm_law = male_only_law }
+			}
+			is_male = yes
+		}
+	}
+	
+	character_score = {
+		base = 0
+		
+		modifier = {
+			add = martial
+		}
+		modifier = {
+			add = 10
+			is_courtier_of = scope:base
+		}
+		modifier = {
+			add = { value = age max = 50 }
+		}
+		modifier = {
+			add = { value = dynasty_prestige_level }
+			multiply = 10
+		}
+		modifier = {
+			add = { value = martial_lifestyle_perk_points }
+			multiply = 10
+		}
+		modifier = {
+			add = 30
+			AND = {
+				exists = dynasty
+				dynasty = {
+					any_dynasty_member = {
+						count > 10
+					}
+				}
+			}
+		}
+		modifier = {
+			add = 20
+			has_education_diplomacy_trigger = yes
+		}
+		modifier = {
+			add = 20
+			has_education_martial_trigger = yes
+		}
+		modifier = {
+			add = 10
+			has_trait = jinshi
+		}
+		modifier = {
+			scope:base.primary_title.tier = tier_barony
+			has_trait_rank = {
+				trait = lifestyle_bureaucrat
+				rank = 1
+			}
+			add = 10
+		}
+		modifier = {
+			has_trait_rank = {
+				trait = lifestyle_bureaucrat
+				rank = 2
+			}
+			add = 20
+		}
+		modifier = {
+			has_trait_rank = {
+				trait = lifestyle_bureaucrat
+				rank = 3
+			}
+			add = 30
+		}
+		modifier = {
+			has_trait_rank = {
+				trait = lifestyle_bureaucrat
+				rank = 4
+			}
+			add = 40
+		}
+		modifier = {
+			has_trait_rank = {
+				trait = lifestyle_bureaucrat
+				rank = 5
+			}
+			add = 50
+		}
+	}
+	
+	
+	config = {
+		background = commander
+		age = { 45 80 }
+	}
+	
+	selection_count = 10
+	
+	pool = heritage
+	court = no
+	gender = male
+}

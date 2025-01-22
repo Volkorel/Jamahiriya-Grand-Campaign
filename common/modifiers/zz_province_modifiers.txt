@@ -1,0 +1,267 @@
+﻿wutaishan_province_modifier = {
+    icon = mountains
+	travel_danger = -14
+}
+taihangshan_province_modifier = {
+    icon = mountains
+	travel_danger = -14
+}
+asihatu_province_modifier = {
+    icon = desert_mountains
+	travel_danger = -10
+}
+changbaishan_province_modifier = {
+    icon = mountains
+	travel_danger = -10
+}
+zijinshan_province_modifier = {
+    icon = hills
+	build_gold_cost = -0.05
+}
+qinhuaihe_province_modifier = {
+    icon = defender_river
+	travel_danger = -10
+}
+taihu_province_modifier = {
+    icon = wetlands
+	development_growth_factor = 0.04
+}
+maoshan_province_modifier = {
+    icon = hills
+	stationed_maa_toughness_mult = normal_maa_toughness_tier_1
+}
+huaguoshan_province_modifier = {
+    icon = coastal_sea
+	travel_danger = -10
+}
+xihu_province_modifier = {
+    icon = wetlands
+	development_growth_factor = 0.04
+}
+yandangshan_province_modifier = {
+    icon = hills
+	travel_danger = -10
+}
+tiantaishan_province_modifier = {
+    icon = hills
+	travel_danger = -10
+}
+jianglangshan_province_modifier = {
+    icon = hills
+	build_prestige_cost = -0.01
+}
+yuehu_province_modifier = {
+    icon = wetlands
+	defender_winter_advantage = 5
+}
+huangshan_province_modifier = {
+    icon = mountains
+	build_prestige_cost = -0.01
+}
+jiuhuashan_province_modifier = {
+    icon = mountains
+	travel_danger = -14
+}
+tianzhushan_province_modifier = {
+    icon = mountains
+	build_gold_cost = -0.05
+}
+tiantangzhai_province_modifier = {
+    icon = hills
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+caishiji_province_modifier = {
+    icon = coastal_sea
+	fort_level = 1
+}
+gulangyu_province_modifier = {
+    icon = coastal_sea
+	travel_danger = -10
+}
+wuyishan_province_modifier = {
+    icon = hills
+	build_prestige_cost = -0.01
+}
+qingyuanshan_province_modifier = {
+    icon = hills
+	build_prestige_cost = -0.01
+}
+lushan_province_modifier = {
+    icon = mountains
+	build_speed = -0.01
+}
+sanqingshan_province_modifier = {
+    icon = mountains
+	travel_danger = -14
+}
+longhushan_province_modifier = {
+    icon = hills
+	fort_level = 1
+}
+wugongshan_province_modifier = {
+    icon = mountains
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+taishan_province_modifier = {
+    icon = hills
+	build_prestige_cost = -0.01
+}
+laoshan_province_modifier = {
+    icon = mountains
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+yimengshan_province_modifier = {
+    icon = mountains
+	build_prestige_cost = -0.01
+}
+songshan_province_modifier = {
+    icon = mountains
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+shennongshan_province_modifier = {
+    icon = mountains
+	supply_limit_mult = 0.05
+}
+yaoshan_province_modifier = {
+    icon = mountains
+	build_gold_cost = -0.05
+}
+laojunshan_province_modifier = {
+    icon = mountains
+	build_prestige_cost = -0.01
+	supply_limit_mult = 0.05
+}
+mangdangshan_province_modifier = {
+    icon = hills
+	travel_danger = -10
+}
+wudangshan_province_modifier = {
+    icon = mountains
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+miluojiang_province_modifier = {
+    icon = wetlands
+	build_prestige_cost = -0.01
+}
+dongtinghu_province_modifier = {
+    icon = sea
+	development_growth_factor = 0.04
+}
+longzhongshan_province_modifier = {
+    icon = jungle
+	travel_danger = -10
+}
+taohuayuan_province_modifier = {
+    icon = farmlands
+	defender_winter_advantage = 5
+}
+tianmenshan_province_modifier = {
+    icon = hills
+	build_prestige_cost = -0.01
+}
+shaoshan_province_modifier = {
+    icon = hills
+	build_speed = -0.01
+}
+hengshan_province_modifier = {
+    icon = mountains
+	stationed_maa_toughness_mult = low_maa_toughness_tier_1
+}
+lijiang_province_modifier = {
+    icon = wetlands
+	travel_danger = -10
+}
+wushan_province_modifier = {
+    icon = mountains
+	travel_danger = -10
+}
+emeishan_province_modifier = {
+    icon = mountains
+	build_prestige_cost = -0.01
+}
+leshan_province_modifier = {
+    icon = hills
+	travel_danger = -14
+}
+jianmenguan_province_modifier = {
+    icon = taiga
+	fort_level = 1
+}
+dingjunshan_province_modifier = {
+    icon = taiga
+	fort_level = 1
+}
+wuzhangyuan_province_modifier = {
+    icon = drylands
+	supply_limit_mult = 0.05
+}
+fanjingshan_province_modifier = {
+    icon = mountains
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+shangrila_province_modifier = {
+    icon = mountains
+	defender_winter_advantage = 5
+}
+yulongxueshan_province_modifier = {
+    icon = mountains
+	defender_winter_advantage = 5
+}
+huashan_province_modifier = {
+    icon = mountains
+	stationed_maa_damage_mult = normal_maa_damage_tier_1
+}
+taibaishan_province_modifier = {
+    icon = mountains
+	build_prestige_cost = -0.01
+}
+kongtongshan_province_modifier = {
+    icon = mountains
+	supply_limit_mult = 0.05
+}
+yueyaquan_province_modifier = {
+    icon = oasis
+	supply_limit_mult = 0.05
+}
+danxia_province_modifier = {
+    icon = desert_mountains
+	build_prestige_cost = -0.01
+}
+chaohu_province_modifier = {
+    icon = wetlands
+	development_growth_factor = 0.04
+}
+poyanghu_province_modifier = {
+    icon = coastal_sea
+	development_growth_factor = 0.04
+}
+henshan_province_modifier = {
+    icon = mountains
+	fort_level = 1
+}
+qingchengshan_province_modifier = {
+    icon = hills
+	travel_danger = -14
+}
+
+################################################
+
+oe_migration_01_modifier = { #大迁徙
+	icon = horse_dead_negative
+	#levy_reinforcement_rate = -0.03
+	levy_size = -0.02
+	tax_mult = -0.02
+}
+
+canal_province_modifier = {
+	icon = defender_river
+	travel_danger = -20
+	supply_limit_mult = 0.25
+	build_speed = -0.2
+}
+
+great_wall_province_modifier = {
+	icon = mountains
+	fort_level = 2
+	building_slot_add = 1
+}

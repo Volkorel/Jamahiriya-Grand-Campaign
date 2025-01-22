@@ -1,0 +1,20 @@
+namespace = oe_admin_events
+
+oe_admin_events.0001 = {
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				any_vassal = {
+					exists = this
+					government_has_flag = government_is_celestial
+				}
+				OR = {
+					government_has_flag = government_is_feudal
+					government_has_flag = government_is_clan
+				}
+			}
+			change_government = imperial_government
+		}
+	}
+}

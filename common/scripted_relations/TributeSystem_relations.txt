@@ -1,0 +1,14 @@
+﻿############# TributeSystem_relations
+# by 往来天地间 WangLaiTianDiJian
+# TributeSystem
+
+
+suzerain = {
+	corresponding = tributary
+	opinion = 10
+}
+
+tributary = {
+	corresponding = suzerain
+	opinion = 10
+}

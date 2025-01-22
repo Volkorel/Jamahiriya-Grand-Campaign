@@ -1,0 +1,197 @@
+﻿namespace = guohao
+guohao.1 = { #议定国号
+	type = character_event
+	title = guohao.001.title
+	desc = guohao.001.desc
+	
+	theme = crown
+	left_portrait = {
+		character = root
+	}
+	
+	trigger = {
+		highest_held_title_tier  > tier_kingdom
+		#culture = { has_cultural_pillar = heritage_chinese }
+	}
+	immediate = {
+		title:e_celestia = { save_scope_as = target_title }
+	}
+
+	option = { #夏
+		name = guohao_xia
+		
+		house = {
+			add_house_modifier = k_xia_east
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #商
+		name = guohao_shang
+		
+		scope:target_title = {
+			set_title_name = e_shang
+		}
+		house = {
+			add_house_modifier = e_shang
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #周
+		name = guohao_zhou
+		
+		scope:target_title = {
+			set_title_name = e_zhou
+		}
+		house = {
+			add_house_modifier = k_zhou
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #秦
+		name = guohao_qin
+		
+		scope:target_title = {
+			set_title_name = k_qin
+		}
+		house = {
+			add_house_modifier = k_qin
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #汉
+		name = guohao_han
+		
+		scope:target_title = {
+			set_title_name = e_han
+		}
+		house = {
+			add_house_modifier = e_han
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #隋
+		name = guohao_sui
+		
+		scope:target_title = {
+			set_title_name = e_sui
+		}
+		house = {
+			add_house_modifier = e_sui
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #唐
+		name = guohao_tang
+		
+		scope:target_title = {
+			set_title_name = e_tang
+		}
+		house = {
+			add_house_modifier = e_tang
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #宋
+		name = guohao_song
+		
+		scope:target_title = {
+			set_title_name = e_song
+		}
+		house = {
+			add_house_modifier = e_song
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = { #明
+		name = guohao_ming
+		
+		scope:target_title = {
+			set_title_name = e_ming
+		}
+		house = {
+			add_house_modifier = e_ming
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	#option = { #custom
+		#name = guohao_cus
+		#custom_tooltip = guohao_cus.tooltip
+		#trigger_event = guohao.2
+		#ai_chance = {
+			#base = 0
+		#}
+	#}
+	option = { 
+		name = guohao.2.b
+		trigger_event = east_title.0004
+	}
+
+}
+
+#天朝改国号
+guohao.2 = {
+	type = character_event
+	title = guohao.001.title
+	desc = east_title.0004.desc
+	theme = crown
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	immediate = {
+	}
+
+	widget = {
+		gui = "event_window_widget_enter_nickname"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = {
+				key = custom_guohao_new
+				default = {
+					localization_key = guohao_enter_your_name
+				}
+			}
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	option = { 
+		name = guohao.2.a
+		house = {
+			set_variable = {
+				name = guohao_custom
+				value = flag:custom
+			}
+		}
+		title:e_celestia = {
+			set_title_name = CUSTOM_GUOHAO
+		}
+	}
+
+	option = { 
+		name = cancel
+	}
+
+}

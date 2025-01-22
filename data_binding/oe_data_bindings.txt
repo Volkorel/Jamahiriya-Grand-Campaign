@@ -1,0 +1,5 @@
+macro = {
+	description = "Is the character an celestial_government?"
+	definition = "IsCelestialRuler(TargetCharacter)"
+	replace_with = "Or(TargetCharacter.GetGovernment.IsType( 'celestial_government' ), TargetCharacter.GetGovernment.IsType( 'imperial_government' ))"
+}

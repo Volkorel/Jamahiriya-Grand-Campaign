@@ -1,0 +1,3137 @@
+﻿
+namespace = shihao
+#######议定谥号
+shihao.1 = {
+	type = character_event
+	title = shihao_custom_nickname.t
+	desc = shihao_custom_nickname.desc
+	theme = death
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:death_man
+	}
+
+	immediate = {
+
+	}
+
+	widget = {
+		gui = "event_window_widget_enter_nickname"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = {
+				key = Shihao_custom_nickname_text
+				default = {
+					localization_key = shihao_custom_nickname1
+				}
+			}
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	#option = { 
+		#name = shihao_custom_nickname.a
+	#
+		#after = {
+			#set_variable = {
+				#name = shihao_custom_nickname_text
+				#value = flag:custom
+			#}
+			#scope:death_man = { set_nickname_effect = { NICKNAME = shihao_custom_nickname2 } }
+			#store_localized_text_in_death = shihao_custom_nickname_text
+		#}
+	#}
+	option = {
+		name = shihao_custom_nickname.a
+		custom_tooltip = shihao_custom_nickname.a.tooltip
+		hidden_effect = {
+			if = {
+				limit = {
+					scope:death_man = { has_any_nickname = yes }
+				}
+				scope:death_man = { remove_nickname = yes }
+			}
+			scope:death_man = {
+				give_nickname = shihao_custom_nickname1
+			}
+		}
+	}
+	option = {
+		name = shihao_custom_nickname.b
+		trigger = {
+			OR = {
+				dynasty = dynasty:longxi_li_dyn #李唐
+				dynasty = dynasty:1000049852 #沙唐
+			}
+		}
+		trigger_event = {
+			days = 7
+			id = shihao.8  #选定唐式谥号	
+		}
+	}
+	option = {
+		name = shihao_custom_nickname.b
+		trigger = {
+			primary_title.tier >= tier_kingdom
+			NOR = {
+				dynasty = dynasty:longxi_li_dyn #李唐
+				dynasty = dynasty:1000049852 #沙唐
+			}
+		}
+		trigger_event = {
+			days = 7
+			id = shihao.9  #选定单字谥号
+		}
+	}
+	after = {
+		remove_variable = Shihao_custom_nickname_text
+	}
+}
+
+shihao.8 = {
+	type = character_event
+	title = death_shihao.001.title
+    desc = death_shihao.001.desc
+	
+	theme = death
+	left_portrait = {
+		character = root
+	}
+	right_portrait = {
+		character = scope:death_man
+	}
+	
+	trigger = {
+		is_oe_imperial_court_trigger = yes
+		scope:death_man = {
+			OR = {
+				primary_title.tier > tier_kingdom
+			   	has_trait = shanghuang			
+			}
+			OR = {
+				culture = { has_cultural_pillar = heritage_chinese }
+				culture = { has_cultural_pillar = heritage_mongolic }
+				culture = { has_cultural_pillar = heritage_turkic }
+				culture = { has_cultural_pillar = heritage_nanman }
+				culture = { has_cultural_pillar = heritage_tunguse }
+				culture = { has_cultural_pillar = heritage_goryeo }
+				culture = { has_cultural_pillar = heritage_yues }
+			}
+		}
+	}
+	immediate = {
+		#scope:death_man = {
+			#add_character_flag = {
+				#flag = had_nickname_event
+			#}
+		#}
+		if = {
+			limit = {
+				scope:death_man = { has_any_nickname = yes }
+			}
+			scope:death_man = { remove_nickname = yes }
+		}
+	}
+	option = { #anzong
+		name = death_shihao.001.a
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = craven
+					has_trait = content
+		        }
+			}
+	    }
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_anzong } } 
+
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #aizong
+		name = death_shihao.001.b
+		trigger = {
+			scope:death_man = {
+		age <= 18
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_aizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #chengzong
+		name = death_shihao.001.c
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = content
+					has_trait = patient
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_chengzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #chunzong
+		name = death_shihao.001.e
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = scholar
+					has_trait = honest
+					has_trait = trusting
+					has_trait = education_stewardship_1
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_chunzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #daizong
+		name = death_shihao.001.f
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = child_of_concubine_male
+					has_trait = family_first
+					has_trait = bastard
+					has_trait = child_of_concubine
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_daizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #daizong1
+		name = death_shihao.001.g
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = education_stewardship_2
+					has_trait = just
+					has_trait = compassionate
+					has_trait = forgiving
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_daizong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #daozong
+		name = death_shihao.001.h
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = trusting
+					has_trait = content
+					has_trait = calm
+					has_trait = improvident
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_daozong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #dezong
+		name = death_shihao.001.i
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+					has_trait = diligent
+					has_trait = trusting
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_dezong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #dingzong
+		name = death_shihao.001.j
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = stubborn
+					has_trait = arbitrary
+					has_trait = callous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_dingzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #duzong
+		name = death_shihao.001.k
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = content
+					has_trait = lustful
+					has_trait = lazy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_duzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #duanzong
+		name = death_shihao.001.l
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = infirm
+					has_trait = humble
+		age <= 20
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_duanzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #gaozong
+		name = death_shihao.001.m
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = generous
+					has_trait = stubborn
+					has_trait = arbitrary
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_gaozong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #gongzong
+		name = death_shihao.001.n
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = compassionate
+					has_trait = education_learning_3
+					has_trait = gregarious
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_gongzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #guangzong
+		name = death_shihao.001.o
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = craven
+					has_trait = fickle
+					has_trait = paranoid
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_guangzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #huaizong
+		name = death_shihao.001.p
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = education_stewardship_2
+		age <= 20
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_huaizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #hengzong
+		name = death_shihao.001.q
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = impatient
+					has_trait = education_diplomacy_1
+					has_trait = education_martial_2
+					has_trait = education_martial_prowess_2
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_huanzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #huizong
+		name = death_shihao.001.r
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = fecund
+					has_trait = scholar
+					has_trait = craven
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_huizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #huizong1
+		name = death_shihao.001.s
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = architect
+					has_trait = lifestyle_mystic
+					has_trait = shy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_huizong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jianzong
+		name = death_shihao.001.t
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					age <= 15
+					has_trait = sickly
+					has_trait = physique_bad_2
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jianzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jingzong
+		name = death_shihao.001.u
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = deceitful
+					has_trait = callous
+					has_trait = brave
+					has_trait = vengeful
+					has_trait = kinslayer_1
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jingzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jinzong
+		name = death_shihao.001.v
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = gregarious
+					has_trait = gluttonous
+					has_trait = lifestyle_hunter
+					has_trait = lifestyle_reveler
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jinzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jinzong1
+		name = death_shihao.001.w
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = diplomat
+					has_trait = education_diplomacy_4
+					has_trait = administrator
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jinzong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #kangzong
+		name = death_shihao.001.x
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = avaricious
+					has_trait = greedy
+					has_trait = arrogant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_kangzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #lizong
+		name = death_shihao.001.y
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = sickly
+					has_trait = physique_bad_1
+					has_trait = physique_bad_2
+					has_trait = weak
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_lizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #lizong1
+		name = death_shihao.001.z
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = lifestyle_mystic
+					has_trait = diligent
+					has_trait = zealous
+					has_trait = compassionate
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_lizong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #liezong
+		name = death_shihao.001.a1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = ambitious
+					has_trait = cynical
+					has_trait = beauty_good_2
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_liezong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #mingzong
+		name = death_shihao.001.b1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = shrewd
+					has_trait = administrator
+					has_trait = forgiving
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_mingzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #muzong
+		name = death_shihao.001.c1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = just
+					age <= 40
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_muzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #ningzong
+		name = death_shihao.001.d1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = temperate
+					has_trait = humble
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ningzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #qingzong
+		name = death_shihao.001.e1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = fickle
+					has_trait = physique_bad_1
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_qingzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #renzong
+		name = death_shihao.001.f1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = generous
+					has_trait = diligent
+					has_trait = compassionate
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_renzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #ruizong
+		name = death_shihao.001.g1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = family_first
+					has_trait = whole_of_body
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ruizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shaozong
+		name = death_shihao.001.h1
+		trigger = {
+			scope:death_man = {
+			    OR = {
+					has_trait = gallant
+					has_trait = temperate
+		    	}
+	    	}
+			sub_realm_size <= 40
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shaozong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shenzong
+		name = death_shihao.001.i1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+					has_trait = fickle
+					has_trait = avaricious
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shenzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shengzong
+		name = death_shihao.001.j1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = theologian
+					has_trait = education_stewardship_4
+					has_trait = diligent
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shengzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shizong
+		name = death_shihao.001.k1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+					has_trait = brave
+					has_trait = strategist
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #sizong
+		name = death_shihao.001.l1
+		trigger = {
+			scope:death_man = {
+			    AND = {
+					has_trait = diligent
+					age <= 34
+				}
+				
+	   		}
+	    sub_realm_size <= 30
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_sizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shunzong
+		name = death_shihao.001.m1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = calm
+					has_trait = patient
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shunzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #suzong
+		name = death_shihao.001.n1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = beauty_good_3
+					has_trait = organizer
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_suzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #taizong
+		name = death_shihao.001.o1
+		trigger = {
+			scope:death_man = {
+				OR = {
+					AND = {
+						has_trait = diligent
+						#has_trait = just
+						has_trait = ambitious
+						has_trait = administrator
+					}
+					father = { has_trait = founding_monarch }
+				}
+		    }
+		   root = { sub_realm_size >= 50 }
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_taizong } }
+
+
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = { #weizong
+		name = death_shihao.001.p1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = lifestyle_reveler
+					has_trait = seducer
+					has_trait = lustful
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_weizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #wenzong
+		name = death_shihao.001.q1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+					has_trait = craven
+					has_trait = humble
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_wenzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #wuzong
+		name = death_shihao.001.r1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = education_martial_3
+					has_trait = brave
+					has_trait = strong
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_wuzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xizong
+		name = death_shihao.001.s1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = chaste
+					has_trait = gluttonous
+					has_trait = reclusive
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xizong1
+		name = death_shihao.001.t1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = family_first
+					has_trait = content
+					has_trait = trusting
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xizong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xizong2
+		name = death_shihao.001.u1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = intellect_good_3
+					has_trait = lifestyle_reveler
+					has_trait = greedy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xizong2 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xianzong
+		name = death_shihao.001.v1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+					has_trait = wrathful
+					has_trait = administrator
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xianzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+  	option = { #xianzong1
+		name = death_shihao.001.w1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diplomat
+					has_trait = diligent
+					has_trait = patient
+		          }
+	  		 }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xianzong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xianzong2
+		name = death_shihao.001.x1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = craven
+		          }
+			
+	   		}
+			sub_realm_size <= 50
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xianzong2 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xiangzong
+		name = death_shihao.001.y1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = deceitful
+    				has_trait = greedy
+    				has_trait = arbitrary
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xiangzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xiaozong
+		name = death_shihao.001.z1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = chaste
+    				has_trait = temperate
+    				has_trait = just
+    				has_trait = family_first
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xiaozong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xuanzong
+		name = death_shihao.001.a2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+    				has_trait = just
+    				has_trait = whole_of_body
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xuanzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xuanzong1
+		name = death_shihao.001.b2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+    				has_trait = just
+    				has_trait = arrogant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xuanzong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yizong
+		name = death_shihao.001.c2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = education_martial_4
+    				has_trait = calm
+    				has_trait = generous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yizong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yizong1
+		name = death_shihao.001.d2
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = strategist
+    				has_trait = scholar
+    				has_trait = flagellant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yizong1 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yizong2
+		name = death_shihao.001.e2
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = beauty_good_3
+    				has_trait = physique_good_3
+    				has_trait = intellect_good_3
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yizong2 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yizong3
+		name = death_shihao.001.f2
+		trigger = {
+			scope:death_man = {
+			OR = {
+							has_trait = lustful
+							has_trait = drunkard
+							has_trait = lifestyle_reveler
+				  #has_trait = diligent
+				  #has_trait = content
+			}
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yizong3 } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yingzong
+		name = death_shihao.001.g2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = gregarious
+    				has_trait = diligent
+    				has_trait = generous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yingzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yuzong
+		name = death_shihao.001.h2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = fickle
+    				has_trait = diligent
+    				has_trait = zealous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yuzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yuanzong
+		name = death_shihao.001.i2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = vengeful
+    				has_trait = scholar
+    				has_trait = greedy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yuanzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhangzong
+		name = death_shihao.001.j2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = just
+    				has_trait = honest
+    				has_trait = forgiving
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhangzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhaozong
+		name = death_shihao.001.k2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+    				has_trait = impatient
+    				has_trait = gallant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhaozong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhezong
+		name = death_shihao.001.l2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = just
+    				has_trait = humble
+    				has_trait = infirm
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhezong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhenzong
+		name = death_shihao.001.m2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = trusting
+    				has_trait = zealous
+    				has_trait = theologian
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhenzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhongzong
+		name = death_shihao.001.n2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = patient
+    				has_trait = just
+    				has_trait = temperate
+    				has_trait = administrator
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhongzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhuangzong
+		name = death_shihao.001.o2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = strategist
+    				has_trait = education_martial_4
+    				has_trait = callous
+    				has_trait = greedy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhuangzong } }
+
+
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #custom
+		name = death_shihao.custom
+		custom_tooltip = shihao_custom_tooltip
+		trigger = {
+			is_ai = no		
+		}
+		trigger_event = shihao.1
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+shihao.9 = {
+	type = character_event
+	title = death_shihao.001.title
+    desc = death_shihao.001.desc
+	
+	theme = death
+	left_portrait = {
+		character = root
+	}
+	right_portrait = {
+		character = scope:death_man
+	}
+	
+	trigger = {
+		is_oe_imperial_court_trigger = yes
+		scope:death_man = {
+			OR = {
+				primary_title.tier > tier_kingdom
+			    has_trait = shanghuang			
+			}
+			OR = {
+				culture = { has_cultural_pillar = heritage_chinese }
+				culture = { has_cultural_pillar = heritage_mongolic }
+				culture = { has_cultural_pillar = heritage_turkic }
+				culture = { has_cultural_pillar = heritage_nanman }
+				culture = { has_cultural_pillar = heritage_tunguse }
+				culture = { has_cultural_pillar = heritage_goryeo }
+				culture = { has_cultural_pillar = heritage_yues }
+			}
+		}
+	}
+	immediate = {
+		#scope:death_man = {
+			add_character_flag = {
+				flag = had_nickname_event
+			}
+		#}
+		if = {
+			limit = {
+				scope:death_man = { has_any_nickname = yes }
+			}
+			scope:death_man = { remove_nickname = yes }
+		}
+	}
+	option = { #custom
+		name = death_shihao.custom
+		trigger = {
+			is_ai = no		
+		}
+		trigger_event = shihao.1
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = {
+		#高皇帝
+		name = death_miaohao.000.taizu
+		trigger = {
+			scope:death_man = {
+				OR = {
+								has_trait = founding_monarch
+								has_trait = greatest_of_khans
+								has_trait = miaohao_trait_taizu
+				}
+		}
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_gao } } 
+		ai_chance = {
+			base = 10000
+		}
+	}
+	option = {
+		#元皇帝
+		name = death_miaohao.000.shizu
+		trigger = {
+			scope:death_man = {
+				OR = {
+								has_trait = restoration_monarch
+					AND = {
+									has_trait = founding_monarch
+						any_held_title = {
+							count = 2
+							tier = tier_empire
+						}
+					}
+				}	
+			}
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yuan } } 
+		ai_chance = {
+			base = 1000
+		}
+	}
+	option = { #anzong
+		name = death_shihao.000.a
+		trigger = {
+			scope:death_man = {
+			   OR = {
+								has_trait = craven
+								has_trait = content
+		        }
+			}
+	    }
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_an } } 
+				
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #aizong
+		name = death_shihao.000.b
+		trigger = {
+			scope:death_man = {
+		age <= 18
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ai } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #chengzong
+		name = death_shihao.000.c
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = content
+					has_trait = patient
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_cheng } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #chunzong
+		name = death_shihao.000.e
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = scholar
+					has_trait = honest
+					has_trait = trusting
+					has_trait = education_stewardship_1
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_chun } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #daizong
+		name = death_shihao.000.f
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = child_of_concubine_male
+					has_trait = family_first
+					has_trait = bastard
+					has_trait = child_of_concubine
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_dai } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #道
+		name = death_shihao.000.g
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = education_stewardship_2
+					has_trait = just
+					has_trait = compassionate
+					has_trait = forgiving
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_dao } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #daozong
+		name = death_shihao.000.h
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = trusting
+					has_trait = content
+					has_trait = calm
+					has_trait = improvident
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_daozong } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #dezong
+		name = death_shihao.000.i
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+					has_trait = diligent
+					has_trait = trusting
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_de } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #dingzong
+		name = death_shihao.000.j
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = stubborn
+					has_trait = arbitrary
+					has_trait = callous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ding } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #duzong
+		name = death_shihao.000.k
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = content
+					has_trait = lustful
+					has_trait = lazy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_du } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #duanzong
+		name = death_shihao.000.l
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = infirm
+					has_trait = humble
+		age <= 20
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_duan } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #gaozong
+		name = death_shihao.000.m
+		trigger = {
+			scope:death_man = {
+				OR = {
+								has_trait = founding_monarch
+					AND = {
+									has_trait = generous
+									has_trait = stubborn
+									has_trait = arbitrary
+					}
+				}
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_gao } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #gongzong
+		name = death_shihao.000.n
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = compassionate
+					has_trait = education_learning_3
+					has_trait = gregarious
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_gong } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #guangzong
+		name = death_shihao.000.o
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = craven
+					has_trait = fickle
+					has_trait = paranoid
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_guang } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #huaizong
+		name = death_shihao.000.p
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = education_stewardship_2
+					age <= 20
+		        }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_huai } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #hengzong
+		name = death_shihao.000.q
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = impatient
+					has_trait = education_diplomacy_1
+					has_trait = education_martial_2
+					has_trait = education_martial_prowess_2
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_huan } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #huizong
+		name = death_shihao.000.r
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = fecund
+					has_trait = scholar
+					has_trait = craven
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_hui } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #hui1
+		name = death_shihao.000.s
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = architect
+					has_trait = lifestyle_mystic
+					has_trait = shy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_hui1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jianzong
+		name = death_shihao.000.t
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					age <= 15
+					has_trait = sickly
+					has_trait = physique_bad_2
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jian } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jingzong
+		name = death_shihao.000.u
+		trigger = {
+			scope:death_man = {
+			    OR = {
+								has_trait = deceitful
+								has_trait = callous
+								has_trait = brave
+								has_trait = vengeful
+								has_trait = kinslayer_1
+		        }
+	   		}		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jing } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jinzong
+		name = death_shihao.000.v
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = gregarious
+					has_trait = gluttonous
+					has_trait = lifestyle_hunter
+					has_trait = lifestyle_reveler
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jin } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #jin1
+		name = death_shihao.000.w
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = diplomat
+					has_trait = education_diplomacy_4
+					has_trait = administrator
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_jin1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #kangzong
+		name = death_shihao.000.x
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = avaricious
+					has_trait = greedy
+					has_trait = arrogant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_kang } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #lizong
+		name = death_shihao.000.y
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = sickly
+					has_trait = physique_bad_1
+					has_trait = physique_bad_2
+					has_trait = weak
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_li } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #li1
+		name = death_shihao.000.z
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = lifestyle_mystic
+					has_trait = diligent
+					has_trait = zealous
+					has_trait = compassionate
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_li1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #liezong
+		name = death_shihao.000.a1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = ambitious
+					has_trait = cynical
+					has_trait = beauty_good_2
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_lie } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #mingzong
+		name = death_shihao.000.b1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = shrewd
+					has_trait = administrator
+					has_trait = forgiving
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ming } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #muzong
+		name = death_shihao.000.c1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = just
+		age <= 40
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_mu } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #ningzong
+		name = death_shihao.000.d1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = temperate
+					has_trait = humble
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ning } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #qingzong
+		name = death_shihao.000.e1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = fickle
+					has_trait = physique_bad_1
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_qing } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #renzong
+		name = death_shihao.000.f1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = generous
+					has_trait = diligent
+					has_trait = compassionate
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ren } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #ruizong
+		name = death_shihao.000.g1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = family_first
+					has_trait = whole_of_body
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_rui } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shaozong
+		name = death_shihao.000.h1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = gallant
+					has_trait = temperate
+		       }
+	   		}
+	   		sub_realm_size <= 40
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shao } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shenzong
+		name = death_shihao.000.i1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+					has_trait = fickle
+					has_trait = avaricious
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shen } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shengzong
+		name = death_shihao.000.j1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = theologian
+					has_trait = education_stewardship_4
+					has_trait = diligent
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_sheng } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shizong
+		name = death_shihao.000.k1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+					has_trait = brave
+					has_trait = strategist
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shi } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #sizong
+		name = death_shihao.000.l1
+		trigger = {
+			scope:death_man = {
+			    AND = {
+					has_trait = diligent
+					age <= 34
+				}
+	   		}
+	  		sub_realm_size <= 30
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_si } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #shunzong
+		name = death_shihao.000.m1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = calm
+					has_trait = patient
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_shun } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #suzong
+		name = death_shihao.000.n1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = beauty_good_3
+					has_trait = organizer
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_su } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #taizong
+		name = death_shihao.000.o1
+		trigger = {
+			scope:death_man = {
+				AND = {
+					has_trait = diligent
+					has_trait = just
+					has_trait = ambitious
+					has_trait = administrator
+		        }
+	   		}
+			sub_realm_size >= 60
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_tai } }
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = { #weizong
+		name = death_shihao.000.p1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = lifestyle_reveler
+					has_trait = seducer
+					has_trait = lustful
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_wei } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #wenzong
+		name = death_shihao.000.q1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+					has_trait = craven
+					has_trait = humble
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_wen } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #wuzong
+		name = death_shihao.000.r1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = education_martial_3
+					has_trait = brave
+					has_trait = strong
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_wu } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xizong
+		name = death_shihao.000.s1
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = chaste
+					has_trait = gluttonous
+					has_trait = reclusive
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xi } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xi1
+		name = death_shihao.000.t1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = family_first
+					has_trait = content
+					has_trait = trusting
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xi1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xi2
+		name = death_shihao.000.u1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = intellect_good_3
+					has_trait = lifestyle_reveler
+					has_trait = greedy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xi2 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xianzong
+		name = death_shihao.000.v1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+					has_trait = wrathful
+					has_trait = administrator
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xian } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+  	option = { #xian1
+		name = death_shihao.000.w1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diplomat
+					has_trait = diligent
+					has_trait = patient
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xian1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xian2
+		name = death_shihao.000.x1
+		trigger = {
+			scope:death_man = {
+			   	AND = {
+					has_trait = craven
+   				}
+	   		}
+	  		sub_realm_size <= 50
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xian2 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xiangzong
+		name = death_shihao.000.y1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = deceitful
+    				has_trait = greedy
+    				has_trait = arbitrary
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xiang } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xiaozong
+		name = death_shihao.000.z1
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = chaste
+    				has_trait = temperate
+    				has_trait = just
+    				has_trait = family_first
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xiao } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xuanzong
+		name = death_shihao.000.a2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+    				has_trait = just
+    				has_trait = whole_of_body
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xuan } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #xuan1
+		name = death_shihao.000.b2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = diligent
+    				has_trait = just
+    				has_trait = arrogant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_xuan1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yizong
+		name = death_shihao.000.c2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = education_martial_4
+    				has_trait = calm
+    				has_trait = generous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yi } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yi1
+		name = death_shihao.000.d2
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = strategist
+    				has_trait = scholar
+    				has_trait = flagellant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yi1 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yi2
+		name = death_shihao.000.e2
+		trigger = {
+			scope:death_man = {
+			   OR = {
+					has_trait = beauty_good_3
+    				has_trait = physique_good_3
+    				has_trait = intellect_good_3
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yi2 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yi3
+		name = death_shihao.000.f2
+		trigger = {
+			scope:death_man = {
+			OR = {
+							has_trait = lustful
+							has_trait = drunkard
+							has_trait = lifestyle_reveler
+				  #has_trait = diligent
+				  #has_trait = content
+			}
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yi3 } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yingzong
+		name = death_shihao.000.g2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = gregarious
+    				has_trait = diligent
+    				has_trait = generous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_ying } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yuzong
+		name = death_shihao.000.h2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = fickle
+    				has_trait = diligent
+    				has_trait = zealous
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yu } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #yuanzong
+		name = death_shihao.000.i2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+						has_trait = vengeful
+   						has_trait = scholar
+    					has_trait = greedy
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_yuan } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhangzong
+		name = death_shihao.000.j2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = just
+    				has_trait = honest
+    				has_trait = forgiving
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhang } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhaozong
+		name = death_shihao.000.k2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = ambitious
+    				has_trait = impatient
+    				has_trait = gallant
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhao } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhezong
+		name = death_shihao.000.l2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = just
+    				has_trait = humble
+    				has_trait = infirm
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhe } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhenzong
+		name = death_shihao.000.m2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = trusting
+    				has_trait = zealous
+    				has_trait = theologian
+		          }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhen } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhongzong
+		name = death_shihao.000.n2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = patient
+    				has_trait = just
+    				has_trait = temperate
+    				has_trait = administrator
+		        }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhong } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { #zhuangzong
+		name = death_shihao.000.o2
+		trigger = {
+			scope:death_man = {
+			   AND = {
+					has_trait = strategist
+    				has_trait = education_martial_4
+    				has_trait = callous
+    				has_trait = greedy
+		        }
+	   }
+		
+		}
+		scope:death_man = { set_nickname_effect = { NICKNAME = shihao_zhuang } }
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+
+#追封谥号（合集功能）
+shihao.11 = {
+	type = character_event
+	title = shihao_custom_nickname.t
+	desc = shihao_custom_nickname.desc
+	theme = death
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:recipient
+		animation = personality_honorable
+	}
+
+	immediate = {
+		clear_saved_scope = death_man
+	}
+
+	#祖先三代和子女
+	option = {
+		name = FATHER
+		trigger = {
+			scope:family = yes
+			scope:recipient.father ?= { is_alive = no }
+		}
+		scope:recipient.father = { save_scope_as = death_man }
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	option = {
+		name = MOTHER
+		trigger = {
+			scope:family = yes
+			scope:recipient.mother ?= { is_alive = no }
+		}
+		scope:recipient.mother = { save_scope_as = death_man }
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	option = {
+		name = GRANDFATHER
+		trigger = {
+			scope:family = yes
+			scope:recipient.father.father ?= { is_alive = no }
+		}
+		scope:recipient.father.father = { save_scope_as = death_man }
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	option = {
+		name = GREATGRANDFATHER
+		trigger = {
+			scope:family = yes
+			scope:recipient.father.father.father ?= { is_alive = no }
+		}
+		scope:recipient.father.father.father = { save_scope_as = death_man }
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	option = {
+		name = relation_children
+		trigger = {
+			scope:family = yes
+			scope:recipient = {
+				any_child ?= {
+					even_if_dead = yes
+					is_alive = no
+				}
+			}
+		}
+		scope:recipient = {
+			random_child = {
+				even_if_dead = yes
+				limit = { is_alive = no }
+				save_scope_as = death_man
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	#随机亲族
+	option = {
+		name = FAMILY
+		trigger = {
+			scope:family = yes
+			scope:recipient = {
+				any_close_or_extended_family_member = {
+					only_if_dead = yes
+				}
+			}
+		}
+		scope:recipient = {
+			random_close_or_extended_family_member = {
+				only_if_dead = yes
+				limit = { NOT = { has_dead_character_flag = shihao_changed } }
+				save_scope_as = death_man
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+
+	#正妻和侧室
+	option = {
+		name = game_concept_primary_spouse
+		trigger = {
+			scope:spouse = yes
+			scope:recipient = {
+				primary_spouse ?= {
+					even_if_dead = yes
+					is_alive = no
+				}
+			}
+		}
+		scope:recipient.primary_spouse = { save_scope_as = death_man }
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	option = {
+		name = SECONDARY_SPOUSES
+		trigger = {
+			scope:spouse = yes
+			scope:recipient = {
+				any_spouse ?= {
+					even_if_dead = yes
+					NOT = { primary_spouse = scope:recipient }
+					is_alive = no
+				}
+			}
+		}
+		scope:recipient = {
+			random_spouse = {
+				only_if_dead = yes
+				limit = { 
+					NOT = { primary_spouse = scope:recipient }
+					NOT = { has_dead_character_flag = shihao_changed }
+				}
+				save_scope_as = death_man
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	#朋友和情人
+	option = {
+		name = FRIENDS_LABEL
+		trigger = {
+			scope:relation = yes
+			scope:recipient = {
+				any_memory = {
+					has_memory_type = friend_died
+					memory_participant:dead_relation = { exists = this }
+				}
+			}
+		}
+		scope:recipient = {
+			random_memory = {
+				has_memory_type = friend_died
+				memory_participant:dead_relation = { save_scope_as = death_man }
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	option = {
+		name = LOVERS_LABEL
+		trigger = {
+			scope:relation = yes
+			scope:recipient = {
+				any_memory = {
+					OR = {
+						has_memory_type = lover_died
+						has_memory_type = soulmate_died
+					}
+					memory_participant:dead_relation = { exists = this }
+				}
+			}
+		}
+		scope:recipient = {
+			random_memory = {
+				OR = {
+					has_memory_type = lover_died
+					has_memory_type = soulmate_died
+				}
+				memory_participant:dead_relation = { save_scope_as = death_man }
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	#前任
+	option = {
+		name = option_past_holder_100
+		trigger = {
+			scope:past_holder = yes
+			scope:recipient = {
+				primary_title = {
+					any_past_holder = {
+						only_if_dead = yes
+						time_since_death = { years <= 100 }
+						NOT = { has_dead_character_flag = shihao_changed }
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			primary_title = {
+				random_past_holder = {
+					only_if_dead = yes
+					limit = {
+						time_since_death = { years <= 100 }
+						NOT = { has_dead_character_flag = shihao_changed }
+					}
+					save_scope_as = death_man
+				}
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	#前任
+	option = {
+		name = option_past_holder_200
+		trigger = {
+			scope:past_holder = yes
+			scope:recipient = {
+				primary_title = {
+					any_past_holder = {
+						only_if_dead = yes
+						time_since_death = { years > 100 }
+						time_since_death = { years <= 200 }
+						NOT = { has_dead_character_flag = shihao_changed }
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			primary_title = {
+				random_past_holder = {
+					only_if_dead = yes
+					limit = {
+						time_since_death = { years > 100 }
+						time_since_death = { years <= 200 }
+						NOT = { has_dead_character_flag = shihao_changed }
+					}
+					save_scope_as = death_man
+				}
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+	#前任
+	option = {
+		name = option_past_holder_300
+		trigger = {
+			scope:past_holder = yes
+			scope:recipient = {
+				primary_title = {
+					any_past_holder = {
+						only_if_dead = yes
+						time_since_death = { years > 200 }
+						NOT = { has_dead_character_flag = shihao_changed }
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			primary_title = {
+				random_past_holder = {
+					only_if_dead = yes
+					limit = {
+						time_since_death = { years > 200 }
+						NOT = { has_dead_character_flag = shihao_changed }
+					}
+					save_scope_as = death_man
+				}
+			}
+		}
+		scope:actor = {
+			trigger_event = shihao.12
+		}
+	}
+
+	#刷新重选
+	option = {
+		name = reflash
+		clear_saved_scope = death_man
+		trigger_event = shihao.11
+	}
+	
+	option = {
+		name = shihao_custom_nickname.b
+
+		hidden_effect = {
+			if = {
+				limit = { scope:recipient = { is_landed = yes } }
+				scope:actor = {
+					add_gold = {
+						value = scope:recipient.highest_held_title_tier
+						multiply = 100
+					}
+					add_piety = {
+						value = scope:recipient.highest_held_title_tier
+						multiply = 100
+					}
+				}
+			}
+			else_if = {
+				limit = {  scope:recipient = { is_landed = no } }
+				scope:actor = {
+					add_gold = 100
+					add_piety = 100
+				}
+			}
+		}
+	}
+}
+
+
+#自定义绰号通用
+shihao.12 = {
+	type = character_event
+	title = shihao_custom_nickname.t
+	desc = shihao_custom_nickname.desc
+	theme = death
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:death_man
+		animation = personality_honorable
+	}
+
+	immediate = {
+
+	}
+
+	widget = {
+		gui = "event_window_widget_enter_nickname"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = {
+				key = Shihao_custom_nickname_text
+				default = {
+					localization_key = shihao_custom_nickname1
+				}
+			}
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	option = {
+		name = shihao_custom_nickname.a
+		send_interface_toast = {
+			title = shihao_custom_nickname.a.tooltip
+			left_icon = scope:death_man
+			scope:death_man = {
+				if = {
+					limit = { has_any_nickname = yes }
+					remove_nickname = yes
+				}
+				set_nickname_effect = {
+					NICKNAME = shihao_custom_nickname1
+				}
+				add_dead_character_flag = {
+					flag = shihao_changed
+					days = 10
+				}
+			}
+		}
+		scope:recipient = {
+			send_interface_toast = {
+				title = holy_seed_toast
+				left_icon = scope:recipient
+				right_icon = scope:death_man
+				create_legend_seed = {
+					type = heroic
+					quality = famed
+					chronicle = loyalty_descent
+					properties = {
+						ancestor = scope:death_man
+						religion = root.religion
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = reflash
+		clear_saved_scope = death_man
+		trigger_event = shihao.11
+	}
+
+	option = {
+		name = shihao_custom_nickname.b
+
+		hidden_effect = {
+			if = {
+				limit = { scope:recipient = { is_landed = yes } }
+				scope:actor = {
+					add_gold = {
+						value = scope:recipient.highest_held_title_tier
+						multiply = 100
+					}
+					add_piety = {
+						value = scope:recipient.highest_held_title_tier
+						multiply = 100
+					}
+				}
+			}
+			else_if = {
+				limit = {  scope:recipient = { is_landed = no } }
+				scope:actor = {
+					add_gold = 100
+					add_piety = 100
+				}
+			}
+		}
+	}
+
+	after = {
+		remove_variable = Shihao_custom_nickname_text
+	}
+}

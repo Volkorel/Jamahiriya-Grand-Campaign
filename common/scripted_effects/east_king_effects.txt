@@ -1,0 +1,165 @@
+﻿#####显示藩侯
+show_chinese_king_effect = {
+
+		if = {
+			limit = {
+				root = {
+					government_has_flag = government_is_celestial
+				}				
+			}
+			root = {
+				## Clear variable always before
+				clear_variable_list = $KINGLIST$
+				every_vassal = {
+					limit = {
+						has_title = $KINGTITLE$
+					}
+					root = {
+						add_to_variable_list = {
+							name = $KINGLIST$
+							target = prev
+						}
+					}					
+				}
+			}
+		}
+		if = {
+			limit = {
+				root = {
+					NOT = {
+						government_has_flag = government_is_celestial
+					}	
+					any_liege_or_above = {
+						government_has_flag = government_is_celestial
+					}				
+				}
+			}
+			root = { clear_variable_list = $KINGLIST$ }
+			root.liege = {
+				every_vassal = {
+					limit = {
+						has_title = $KINGTITLE$
+					}
+					root = {
+						add_to_variable_list = {
+							name = $KINGLIST$
+							target = prev
+						}
+					}					
+				}
+			}
+		}	
+}
+#####创建藩王头衔
+OE_create_kingdom_effect = {
+	play_music_cue_once = { TRACK = mx_cue_ck3_vocal_maintheme }
+	scope:actor = {
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		$KINGTITLE$ = {
+			change_title_holder = {
+			holder = scope:secondary_actor
+			change = scope:change
+			}	
+		}
+		scope:secondary_actor = {
+			change_liege = {
+				liege = scope:actor
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	}
+	$KINGTITLE$.holder = {
+		change_government_fanwang_effect = yes
+		add_opinion_to_actor_receive_kingdom = yes
+	}
+}
+
+
+
+#####显示公卿
+show_chinese_duke_effect = {
+
+	if = {
+		limit = {
+			root = {
+				government_has_flag = government_is_celestial
+			}				
+		}
+		root = {
+			## Clear variable always before
+			clear_variable_list = $DUKELIST$
+			every_vassal = {
+				limit = {
+					has_title = $DUKETITLE$
+				}
+				root = {
+					add_to_variable_list = {
+						name = $DUKELIST$
+						target = prev
+					}
+				}					
+			}
+		}
+	}
+	if = {
+		limit = {
+			root = {
+				NOT = {
+					government_has_flag = government_is_celestial
+				}	
+				any_liege_or_above = {
+					government_has_flag = government_is_celestial
+				}				
+			}
+		}
+		root = { clear_variable_list = $DUKELIST$ }
+		root.liege = {
+			every_vassal = {
+				limit = {
+					has_title = $DUKETITLE$
+				}
+				root = {
+					add_to_variable_list = {
+						name = $DUKELIST$
+						target = prev
+					}
+				}					
+			}
+		}
+	}	
+}
+
+#####创建公卿头衔
+OE_create_duchy_effect = {
+	play_music_cue_once = { TRACK = mx_cue_ck3_vocal_maintheme }
+	scope:actor = {
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		$DUKETITLE$ = {
+			change_title_holder = {
+				holder = scope:secondary_actor
+				change = scope:change
+			}
+		}
+		scope:secondary_actor = {
+			change_liege = {
+				liege = scope:actor
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	}
+	$DUKETITLE$.holder = {
+		add_realm_law_skip_effects = official_succession_law
+		change_government_royal_government_effect = yes
+		add_opinion_to_actor_receive_duchy = yes
+	}
+}

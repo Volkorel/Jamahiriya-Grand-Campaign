@@ -1,0 +1,34 @@
+﻿han = {
+	color = han
+	
+	ethos = ethos_courtly
+	heritage = heritage_chinese
+	language = language_chinese 
+	martial_custom = martial_custom_male_only
+	traditions = {
+		tradition_agrarian
+		tradition_philosopher_culture
+		tradition_chinese_succession
+		tradition_loyal_soldiers
+		tradition_hard_working
+		#tradition_culture_blending
+		#tradition_family_entrepreneurship
+		#tradition_isolationist
+		#tradition_staunch_traditionalists
+	}
+
+	name_list = name_list_han
+	
+	coa_gfx = { chinese_group_coa_gfx }
+	building_gfx = { chinese_building_gfx } 
+	clothing_gfx = { chinese_clothing_gfx }
+	unit_gfx = { mongol_unit_gfx }
+		
+	ethnicities = {
+		10 = asian
+		10 = chinese
+		10 = chinese1
+		10 = chinese2
+		10 = yamato
+	}
+}

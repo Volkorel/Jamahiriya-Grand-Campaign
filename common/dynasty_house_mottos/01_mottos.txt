@@ -1,0 +1,12 @@
+﻿chinese_dynasties_mottos = {
+	insert = mottos_chinese
+	weight = {
+		value = 2500
+	}
+	trigger = {
+		OR = {
+			has_culture = culture:han
+			faith = { religion = { is_in_family = rf_sino } }
+		}
+	}
+}

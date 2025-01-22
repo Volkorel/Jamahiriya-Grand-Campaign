@@ -1,0 +1,78 @@
+﻿abdicate_decision = { 
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	decision_group_type = major
+	desc = abdicate_decision_desc
+
+	ai_check_interval = 36
+
+	sort_order = 75
+
+	is_shown = {
+		OR = {
+			highest_held_title_tier >= tier_kingdom
+			has_primary_title = title:d_gosho
+		}
+		OR = {
+			government_has_flag = government_is_feudal
+			government_has_flag = government_is_clan
+			government_has_flag = government_is_celestial
+		}
+	}
+
+	is_valid = {	}
+
+	is_valid_showing_failures_only = {
+		#is_at_war = no
+		# Must be at least 60 years old or have reigned for 20 years, or infirm
+
+	}
+	cost = {
+		piety = {
+			value = major_prestige_value
+		}
+	}
+	effect = {
+		custom_tooltip = abdicate_decision_effect_text
+		trigger_event = abdication.0001
+
+		# If faith has a monastic tradition, may retire as a monk
+	}
+
+	ai_potential = {
+		always = yes
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 15
+			has_title = title:d_gosho
+			dynasty = dynasty:10000420
+			NOT = { has_title = title:k_yamato }
+		}
+		modifier = {
+			add = 60
+			OR = {
+				has_title = title:e_celestia
+				has_title = title:e_cathay
+			}
+			is_imprisoned = yes
+		}
+		modifier = {
+			add = 30
+			has_title = title:d_gosho
+			dynasty = dynasty:10000420
+			age > 40
+		}
+		modifier = {
+			add = 30
+			has_title = title:d_gosho
+			dynasty = dynasty:10000420
+			any_child = {
+				count > 3
+			}
+		}
+		
+	}
+}

@@ -1,0 +1,310 @@
+﻿
+chaogong_map = {
+	effect = {
+		every_barony = { set_color_from_title = title:k_xia_east }
+
+		every_county = {
+			if = {
+				limit = {
+					holder.top_liege = {
+						exists = var:my_suzerain
+						var:my_suzerain = {
+							is_alive = yes
+							is_independent_ruler = yes
+							TributeSystem_suzerain_is_civilized_trigger = yes
+						}
+					}
+				}
+				every_county_province = { barony = { set_color_from_title = title:e_roman_empire } } #怀柔帝国
+			}
+			else_if = {
+				limit = {
+					AND = {
+						holder.top_liege.primary_title = {
+							any_in_de_facto_hierarchy = {
+								continue = { tier >= tier_duchy }
+								holder = { is_suzerain = yes }
+							}
+						}
+						holder.top_liege = {
+							exists = primary_title
+							TributeSystem_suzerain_is_civilized_trigger = yes
+						}
+					}
+				}
+				every_county_province = { barony = { set_color_from_title = title:e_roman_empire } } 
+			}
+		}
+		every_county = {
+			if = {
+				limit = {
+					holder.top_liege = {
+						exists = var:my_suzerain
+						var:my_suzerain = {
+							is_alive = yes
+							is_independent_ruler = yes
+							TributeSystem_suzerain_is_league_trigger = yes
+						}
+					}
+				}
+				every_county_province = { barony = { set_color_from_title = title:k_venice } } #会盟帝国
+			}
+			else_if = {
+				limit = {
+					AND = {
+						holder.top_liege.primary_title = {
+							any_in_de_facto_hierarchy = {
+								continue = { tier >= tier_duchy }
+								holder = { is_suzerain = yes }
+							}
+						}
+						holder.top_liege = {
+							exists = primary_title
+							TributeSystem_suzerain_is_league_trigger = yes
+						}
+					}
+				}
+				every_county_province = { barony = { set_color_from_title = title:k_venice } }
+			}
+		}
+		every_county = {
+			if = {
+				limit = {
+					holder.top_liege = {
+						exists = var:my_suzerain
+						var:my_suzerain = {
+							is_alive = yes
+							is_independent_ruler = yes
+							TributeSystem_suzerain_is_hegemony_trigger = yes
+						}
+					}
+				}
+				every_county_province = { barony = { set_color_from_title = title:e_caspian-pontic_steppe } } #霸主帝国
+			}
+			else_if = {
+				limit = {
+					AND = {
+						holder.top_liege.primary_title = {
+							any_in_de_facto_hierarchy = {
+								continue = { tier >= tier_duchy }
+								holder = { is_suzerain = yes }
+							}
+						}
+						holder.top_liege = {
+							exists = primary_title
+							TributeSystem_suzerain_is_hegemony_trigger = yes
+						}
+					}
+				}
+				every_county_province = { barony = { set_color_from_title = title:e_caspian-pontic_steppe } }
+			}
+		}
+	}
+	is_shown = {
+		any_player = {
+			is_ai = no
+		}
+	}
+	is_valid = {
+		always = yes
+	}
+}
+
+east_contract_map = {
+	effect = {
+		every_barony = { set_color_from_title = title:k_xia_east }
+		
+		every_ruler = {
+			limit = { 
+				#government_has_flag = government_is_celestial 
+				is_ai = no
+			}
+			top_liege = {
+				every_sub_realm_county = {
+					every_county_province = {
+						barony = { set_color_from_title = title:e_celestia }
+					}
+				}
+				every_vassal_or_below = { 
+					limit = { 
+						OR = { 
+							government_has_flag = government_is_bureau
+							AND = { 
+								vassal_contract_has_flag = imperial_contract_0
+								is_independent_ruler = no
+							}	
+						}
+					}
+					every_sub_realm_county = {
+						every_county_province = {
+							barony = { set_color_from_title = title:c_mandavyapura }
+						}
+					}
+				}
+				every_vassal_or_below = { 
+					limit = { 
+						OR = { 
+							government_has_flag = government_is_legion
+							AND = { 
+								vassal_contract_has_flag = imperial_contract_1
+								is_independent_ruler = no
+							}	
+						}
+					}
+					every_sub_realm_county = {
+						every_county_province = {
+							barony = { set_color_from_title = title:c_pagan }
+						}
+					}
+				}
+				every_vassal_or_below = { 
+					limit = { 
+						OR = { 
+							AND = { 
+								vassal_contract_has_flag = imperial_contract_2
+								is_independent_ruler = no
+							}	
+						}
+					}
+					every_sub_realm_county = {
+						every_county_province = {
+							barony = { set_color_from_title = title:c_alexandria }
+						}
+					}
+				}
+				every_vassal_or_below = { 
+					limit = { 
+						NOR = { 
+							government_has_flag = government_is_legion
+							government_has_flag = government_is_bureau
+							AND = { 
+								vassal_contract_has_flag = imperial_contract_2
+								is_independent_ruler = no
+							}	
+							AND = { 
+								vassal_contract_has_flag = imperial_contract_1
+								is_independent_ruler = no
+							}
+							AND = { 
+								vassal_contract_has_flag = imperial_contract_0
+								is_independent_ruler = no
+							}
+						}
+					}
+					every_sub_realm_county = {
+						every_county_province = {
+							barony = { set_color_from_title = title:c_biton }
+						}
+					}
+				}
+			}	
+		}
+	}
+	is_shown = {
+		any_player = {
+			is_ai = no
+		}
+	}
+	is_valid = {
+		always = yes
+	}
+}
+
+siro_special_slot_map = {
+	effect = {
+			every_barony = {
+				if = {
+					limit = { 
+						is_holy_site = yes
+						title_province = { has_special_building_slot = yes }
+					}
+					if = {
+						limit = { title_province = { has_special_building = yes } }
+						set_color_from_title = title:k_sapmi
+					}
+					else = {
+						set_color_from_title = title:k_goryeo
+					}						
+				}
+				else_if = {
+					limit = { title_province = { has_special_building_slot = yes } }
+					if = {
+						limit = { title_province = { has_special_building = yes } }
+						set_color_from_title = title:k_kham
+					}
+					else = {
+						set_color_from_title = title:k_pagan
+					}
+				}
+				else = {
+					set_color_from_title = title:k_angara
+				}
+			}
+	}
+	is_shown = {
+		any_player = {
+			is_ai = no
+		}
+	}
+	is_valid = {
+		always = yes
+	}
+}
+
+
+bureaucrat_houses = {
+	effect = {
+		every_barony = { set_color_from_title = title:k_xia_east }
+		every_player = {
+			limit = { is_ai = no }
+			save_scope_as = bureaucrat_root
+		}
+		every_ruler = {
+			limit = {
+				dynasty = scope:bureaucrat_root.dynasty
+			}
+			if = {
+				limit = { highest_held_title_tier > barony }
+				every_sub_realm_county = {
+					every_county_province = {
+						barony = { set_color_from_title = title:e_persia }
+					}
+				}
+			}
+			else = {
+				every_sub_realm_barony = { set_color_from_title = title:e_persia }
+			}
+		}
+		every_ruler = {
+			limit = {
+				is_close_or_extended_family_of = scope:bureaucrat_root
+			}
+			if = {
+				limit = { highest_held_title_tier > tier_barony }
+				every_sub_realm_county = {
+					every_county_province = {
+						barony = { set_color_from_title = title:e_jurchen }
+					}
+				}
+			}
+			else = {
+				every_sub_realm_barony = { set_color_from_title = title:e_jurchen }
+			}
+		}
+		scope:bureaucrat_root = {
+			every_sub_realm_county = {
+				every_county_province = {
+					barony = { set_color_from_title = title:k_arabia }
+				}
+			}
+		}
+	}
+	is_shown = {
+		any_player = {
+			is_ai = no
+		}
+	}
+	is_valid = {
+		always = yes
+	}
+}

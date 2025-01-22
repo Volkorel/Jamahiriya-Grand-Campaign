@@ -1,0 +1,938 @@
+﻿#by 凝辅国
+#设立军府 
+change_vassal_legion_interaction = { 
+	category = interaction_category_admin
+	desc = change_vassal_legion_interaction_desc
+	icon = icon_acknowledge_governor
+	use_diplomatic_range = yes
+	common_interaction = no
+	interface_priority = 100
+	can_send_despite_rejection = yes
+	ai_maybe = yes
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:actor = {
+			#culture = { has_cultural_pillar = heritage_chinese }
+			NOT = { has_realm_law = official_succession_law }
+			government_has_flag = government_is_celestial
+			OR = {
+				highest_held_title_tier >= tier_kingdom
+				AND = {
+					is_legion_government_trigger = yes
+					is_ai = no
+				}
+				AND = {
+					is_independent_ruler = yes
+					highest_held_title_tier = tier_duchy
+				}
+			}
+		}
+		scope:recipient = {
+			holds_landed_title = yes
+			is_vassal_of = scope:actor
+			NOT = { vassal_contract_has_flag = imperial_contract_1 }
+			is_milita_government_trigger = no
+		}
+	}
+	is_valid = {
+	}
+	on_accept = {
+		scope:actor = {
+			trigger_event = change_vassal_legion_interaction.01
+			show_as_tooltip = {
+				scope:recipient = {
+					add_opinion = {
+						modifier = let_me_become_legion_opinion
+						target = scope:actor
+					}
+					change_government_milita_government_effect = yes
+				}
+			}
+		}
+	}
+	on_decline = {
+		scope:actor = {
+			trigger_event = change_vassal_legion_interaction.02
+			show_as_tooltip = {
+				add_opinion = {
+					modifier = rejected_my_order_opinion
+					target = scope:recipient
+				}
+				scope:recipient = {
+					add_opinion = {
+						modifier = want_me_become_legion_opinion
+						target = scope:actor
+					}
+				}
+			}
+		}
+	}
+	cooldown_against_recipient = { years = 2 } 
+	ai_accept = {
+		base = 50
+		modifier = {
+		add = 20
+		trigger_if = {
+			limit = {
+				scope:recipient.dynasty ?= {
+					any_dynasty_member = {
+						count >= 10
+						is_alive = yes
+					}
+				}
+			}
+			always = yes
+		}
+		desc = TEN_ALIVE_DYNASTY_MEMBER
+	}
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 1.0
+			desc = AI_OPINION_REASON
+		}
+		modifier = {
+			add = 30
+			scope:recipient = {
+				is_powerful_vassal = yes
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = -20
+			scope:recipient = {
+				is_councillor = yes
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = -30
+			scope:actor = {
+				OR = {
+					has_focus_stewardship = yes
+					has_focus_learning = yes
+				}
+			}
+		}
+		# Government modifiers
+		modifier = {
+			add = 20
+			scope:actor = {
+				government_has_flag = government_is_celestial
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = 20
+			scope:recipient = {
+				government_has_flag = government_is_feudal
+			}
+			desc = VASSAL_IS_FEUDAL_REASON
+		}
+		modifier = {
+			add = -50
+			scope:recipient = {
+				government_has_flag = government_is_bureau
+			}
+			desc = VASSAL_IS_BUREAU_REASON
+		}
+		modifier = {
+			scope:hook = yes
+			add = 30
+			desc = SCHEME_WEAK_HOOK_USED
+		}
+	}
+	ai_will_do = {
+		base = 1
+	}
+	auto_accept = {
+		OR = {
+			scope:recipient = {
+				is_imprisoned_by = scope:actor
+			}
+			custom_description = {
+				text = "spending_hook"
+				subject = scope:actor
+				object = scope:recipient
+				scope:hook = yes #未知集中报错
+				scope:actor = { has_strong_hook = scope:recipient }
+			}
+		}
+	}
+	send_option = {
+		is_valid = {
+			scope:actor = {
+				has_usable_hook = scope:recipient
+			}
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+	send_options_exclusive = no
+}
+#设立民州
+change_vassal_bureau_interaction = {
+	category = interaction_category_admin
+	desc = change_vassal_bureau_interaction_desc
+	icon = icon_teach_governor
+	use_diplomatic_range = yes
+	common_interaction = yes
+	interface_priority = 100
+	can_send_despite_rejection = yes
+	ai_maybe = yes
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:actor = {
+			#culture = { has_cultural_pillar = heritage_chinese }	
+			government_has_flag = government_is_celestial
+			NOT = { is_legion_government_trigger = yes }
+			OR = {
+				highest_held_title_tier >= tier_kingdom
+				AND = {
+					highest_held_title_tier = tier_duchy
+					is_independent_ruler = yes				
+				}
+			}
+		}
+		scope:recipient = {
+			holds_landed_title = yes
+			is_vassal_of = scope:actor
+			government_has_flag = government_is_celestial
+			NOT = { vassal_contract_has_flag = imperial_contract_0 }
+			is_bureau_government_trigger = no
+		}
+	}
+	is_valid = {
+	}
+
+	on_accept = {
+		scope:actor = {
+			trigger_event = change_vassal_bureau_interaction.01
+			show_as_tooltip = {
+				scope:recipient = {
+					add_opinion = {
+						modifier = let_me_become_bureau_opinion
+						target = scope:actor
+					}	
+					change_government_bureau_government_effect = yes
+				}
+			}
+		}
+	}
+	on_decline = {
+		scope:actor = {
+			trigger_event = change_vassal_bureau_interaction.02
+			show_as_tooltip = {
+				scope:recipient = {
+					start_war = {
+						casus_belli = refused_liege_demand_war
+						target = scope:actor
+					}
+				}
+			}
+		}
+	}
+	cooldown_against_recipient = { years = 1 } 
+	ai_accept = {
+		base = 0
+		opinion_modifier = {
+			trigger = {
+				scope:recipient = {
+					opinion = {
+						target = scope:actor
+						value < 0
+					}
+				}
+			}
+			opinion_target = scope:actor
+			who = scope:recipient
+			multiplier = 1
+			desc = AI_OPINION_REASON
+		}
+
+		modifier = {
+			scope:hook = yes
+			add = 40
+			desc = SCHEME_WEAK_HOOK_USED
+		}
+
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 0.8
+			desc = AI_OPINION_REASON
+		}
+		
+		modifier = {
+			add = 20
+			scope:actor = {
+				has_realm_law_flag = vassal_refusal_is_treason
+			}
+			desc = AI_REFUSAL_IS_TREASON
+		}
+		modifier = {
+			exists = scope:actor.primary_title.title_capital_county
+			OR = {
+				scope:recipient.primary_title = scope:actor.primary_title.title_capital_county
+				scope:recipient.primary_title = scope:actor.primary_title.title_capital_county.de_jure_liege
+			}
+			add = 50
+			desc = AI_TITLE_IS_REALM_CAPITAL
+		}
+		modifier = {
+			add = 30
+			scope:actor = {
+				has_claim_on = scope:recipient.primary_title
+			}
+			desc = AI_LIEGE_HAS_CLAIM_ON_TITLE
+		}
+
+		ai_value_modifier = {
+			who = scope:recipient
+			ai_greed = {
+				if = {
+					limit = {
+						scope:recipient = { NOT = { ai_greed = 0 } }
+					}
+					value = -0.75
+				}
+			}
+			ai_honor  = {
+				if = {
+					limit = {
+						scope:recipient = { #If AI is honorable and the law compels to obey the liege, AI will be more likely to obey.
+							ai_honor > 0
+						}
+						scope:actor = {
+							has_realm_law_flag = vassal_refusal_is_treason
+						}
+					}
+					value = 0.5
+				}
+			}
+		}
+		modifier = { #I am a King!
+			desc = offer_vassalization_interaction_aibehavior_amkingtier_tt
+			trigger = {
+				scope:recipient = { highest_held_title_tier = tier_kingdom }
+			}
+			add = -40
+		}
+		modifier = {
+			add = intimidated_halved_reason_value
+			scope:recipient = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 1
+				}
+			}
+			desc = INTIMIDATED_REASON
+		}
+		modifier = {
+			add = cowed_halved_reason_value
+			scope:recipient = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 2
+				}
+			}
+			desc = COWED_REASON
+		}
+		modifier = { #Comparative military strength.
+			desc = offer_vassalization_interaction_aibehavior_power_tt
+				add = {
+				value = 1
+					subtract = {
+					value = scope:recipient.current_military_strength
+					divide = { value = scope:actor.current_military_strength min = 1 }
+					}
+				multiply = 50
+				max = 20
+			  }
+		}
+
+		modifier = {
+			add = 50
+			desc = VASSAL_FAITHFUL
+		}
+		modifier = {
+			add = -40
+			trigger_if = {
+				limit = {
+					scope:recipient = { is_a_faction_member = yes }
+				}
+				scope:recipient = {
+					joined_faction = { faction_target = scope:actor }
+				}
+			}
+			desc = HAS_FACTIONS_TARGETING_ME
+		}
+		modifier = {
+			add = scope:actor.learning
+			desc = LIEGE_LEARING
+		}
+		modifier = {
+			add = scope:actor.stewardship
+			desc = LIEGE_STEWARDSHIP
+		}
+		modifier = {
+			add = -30
+			scope:recipient = {
+				prowess >= 50
+			}
+			desc = VASSAL_PROWESS
+		}
+		modifier = {
+			add = -20
+			trigger_if = {
+				limit = {
+					scope:recipient.dynasty ?= {
+						any_dynasty_member = {
+							count >= 10
+							is_alive = yes
+						}
+					}
+				}
+			}
+			desc = TEN_ALIVE_DYNASTY_MEMBER
+		}
+		modifier = {
+			add = -40
+			scope:recipient = {
+				is_powerful_vassal = yes
+			}
+			desc = VASSAL_IS_POWERFUL
+		}
+		# Government modifiers
+		modifier = {
+			add = -20
+			scope:actor = {
+				government_has_flag = government_is_celestial
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = -100
+			scope:recipient = {
+				government_has_flag = government_is_feudal
+			}
+			desc = VASSAL_IS_FEUDAL_REASON
+		}
+		modifier = {
+			add = -100
+			scope:recipient = {
+				is_legion_government_trigger = yes
+			}
+			desc = VASSAL_IS_legion_REASON
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+
+	auto_accept = {
+		OR = {
+			scope:recipient = {
+				is_imprisoned_by = scope:actor
+			}
+			custom_description = {
+				text = "spending_hook"
+				subject = scope:actor
+				object = scope:recipient
+				scope:hook = yes
+				scope:actor = { has_strong_hook = scope:recipient }
+			}
+		}
+	}
+	send_option = {
+		is_valid = {
+			scope:actor = {
+				has_usable_hook = scope:recipient
+			}
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+	send_options_exclusive = no
+}
+#推行流官制
+change_vassal_official_succession = {
+	category = interaction_category_admin
+	desc = change_vassal_official_succession_desc
+	icon = request_appointment_support
+	use_diplomatic_range = yes
+	#common_interaction = yes
+	interface_priority = 100
+	can_send_despite_rejection = yes
+	ai_maybe = yes
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:actor = {
+			#culture = { has_cultural_pillar = heritage_chinese }
+			government_has_flag = government_is_celestial
+			OR = {
+				highest_held_title_tier >= tier_kingdom
+				AND = {
+					is_legion_government_trigger = yes
+				}
+				AND = {
+					is_independent_ruler = yes
+					highest_held_title_tier = tier_duchy
+				}
+			}
+		}
+		scope:recipient = {
+			holds_landed_title = yes
+			is_vassal_of = scope:actor
+			government_has_flag = government_is_celestial
+			NOT = { has_realm_law = official_succession_law }
+			can_have_official_succession_law_trigger = yes
+		}
+	}
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				highest_held_title_tier < tier_kingdom
+				AND = {	
+					scope:actor = {
+						culture = { has_innovation = innovation_court_officials }
+					}
+					highest_held_title_tier = tier_kingdom
+					NOT = {
+						vassal_contract_has_flag = imperial_royal_1
+					}
+				}
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			trigger_event = change_vassal_official_succession.01
+			show_as_tooltip = {
+				scope:recipient = {
+					add_opinion = {
+						modifier = let_me_become_official_succession_opinion
+						target = scope:actor
+					}
+					add_realm_law_skip_effects = official_succession_law
+				}
+			}
+		}
+	}
+	
+	on_decline = {
+		scope:actor = {
+			trigger_event = change_vassal_official_succession.02
+			show_as_tooltip = {
+				scope:recipient = {
+					start_war = {
+						casus_belli = refused_liege_demand_war
+						target = scope:actor
+					}
+				}
+			}
+		}
+	}
+	cooldown_against_recipient = { years = 1 } #未知的集中报错 缺少域
+	ai_accept = {
+		base = -20
+		opinion_modifier = {
+			trigger = {
+				scope:recipient = {
+					opinion = {
+						target = scope:actor
+						value < 0
+					}
+				}
+			}
+			opinion_target = scope:actor
+			who = scope:recipient
+			multiplier = 1
+			desc = AI_OPINION_REASON
+		}
+
+		modifier = {
+			scope:hook = yes
+			add = 40
+			desc = SCHEME_WEAK_HOOK_USED
+		}
+
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 0.8
+			desc = AI_OPINION_REASON
+		}
+		
+		modifier = {
+			add = 20
+			scope:actor = {
+				has_realm_law_flag = vassal_refusal_is_treason
+			}
+			desc = AI_REFUSAL_IS_TREASON
+		}
+		modifier = {
+			exists = scope:actor.primary_title.title_capital_county
+			OR = {
+				scope:recipient.primary_title = scope:actor.primary_title.title_capital_county
+				scope:recipient.primary_title = scope:actor.primary_title.title_capital_county.de_jure_liege
+			}
+			add = 50
+			desc = AI_TITLE_IS_REALM_CAPITAL
+		}
+		modifier = {
+			add = 30
+			scope:actor = {
+				has_claim_on = scope:recipient.primary_title
+			}
+			desc = AI_LIEGE_HAS_CLAIM_ON_TITLE
+		}
+
+		ai_value_modifier = {
+			who = scope:recipient
+			ai_greed = {
+				if = {
+					limit = {
+						scope:recipient = { NOT = { ai_greed = 0 } }
+					}
+					value = -0.75
+				}
+			}
+			ai_honor  = {
+				if = {
+					limit = {
+						scope:recipient = { #If AI is honorable and the law compels to obey the liege, AI will be more likely to obey.
+							ai_honor > 0
+						}
+						scope:actor = {
+							has_realm_law_flag = vassal_refusal_is_treason
+						}
+					}
+					value = 0.5
+				}
+			}
+		}
+		modifier = { #I am a King!
+			desc = offer_vassalization_interaction_aibehavior_amkingtier_tt
+			trigger = {
+				scope:recipient = { highest_held_title_tier = tier_kingdom }
+			}
+			add = -20
+		}
+#		modifier = { #Title is part of vassal's primary title de-jure.
+#			add = -25
+#			OR = {
+#				scope:recipient.primary_title = {
+#					is_de_jure_liege_or_above_target = scope:landed_title
+#				}
+#				scope:recipient.primary_title = scope:landed_title
+#			}
+#			desc = AI_REFUSAL_IS_DE_JURE_UNDER
+#		}
+		modifier = {
+			add = intimidated_halved_reason_value
+			scope:recipient = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 1
+				}
+			}
+			desc = INTIMIDATED_REASON
+		}
+		modifier = {
+			add = cowed_halved_reason_value
+			scope:recipient = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 2
+				}
+			}
+			desc = COWED_REASON
+		}
+		modifier = { #Comparative military strength.
+			desc = offer_vassalization_interaction_aibehavior_power_tt
+				add = {
+				value = 1
+					subtract = {
+					value = scope:recipient.current_military_strength
+					divide = { value = scope:actor.current_military_strength min = 1 }
+					}
+				multiply = 50
+				max = 20
+			  }
+		}
+
+		modifier = {
+			add = 50
+			desc = VASSAL_FAITHFUL
+		}
+		modifier = {
+			add = -30
+			trigger_if = {
+				limit = {
+					scope:recipient = { is_a_faction_member = yes }
+				}
+				scope:recipient = {
+					joined_faction = { faction_target = scope:actor }
+				}
+			}
+			desc = HAS_FACTIONS_TARGETING_ME
+		}
+		modifier = {
+			add = scope:actor.learning
+			desc = LIEGE_LEARING
+		}
+		modifier = {
+			add = scope:actor.stewardship
+			desc = LIEGE_STEWARDSHIP
+		}
+		modifier = {
+			add = -30
+			scope:recipient = {
+				prowess >= 50
+			}
+			desc = VASSAL_PROWESS
+		}
+		modifier = {
+			add = 20
+			trigger_if = {
+				limit = {
+					scope:recipient.dynasty ?= {
+						any_dynasty_member = {
+							count >= 10
+							is_alive = yes
+						}
+					}
+				}
+				always = yes
+			}
+			desc = TEN_ALIVE_DYNASTY_MEMBER
+		}
+		modifier = {
+			add = -30
+			scope:recipient = {
+				is_powerful_vassal = yes
+			}
+			desc = VASSAL_IS_POWERFUL
+		}
+		# Government modifiers
+		modifier = {
+			add = -20
+			scope:actor = {
+				government_has_flag = government_is_celestial
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = -100
+			scope:recipient = {
+				government_has_flag = government_is_feudal
+			}
+			desc = VASSAL_IS_FEUDAL_REASON
+		}
+		modifier = {
+			add = -100
+			scope:recipient = {
+				is_legion_government_trigger = yes
+			}
+			desc = VASSAL_IS_legion_REASON
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+	auto_accept = {
+		OR = {
+			scope:recipient = {
+				is_imprisoned_by = scope:actor
+			}
+			custom_description = {
+				text = "spending_hook"
+				subject = scope:actor
+				object = scope:recipient
+				scope:hook = yes
+				scope:actor = { has_strong_hook = scope:recipient }
+			}
+		}
+	}
+	send_option = {
+		is_valid = {
+			scope:actor = {
+				has_usable_hook = scope:recipient
+			}
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+	send_options_exclusive = no
+}
+#准许世袭制
+change_vassal_heir_succession = {
+	category = interaction_category_admin
+	desc = change_vassal_heir_succession_desc
+	icon = icon_vassal
+	use_diplomatic_range = yes
+	common_interaction = no
+	interface_priority = 100
+	ai_maybe = yes
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:actor = {
+			#culture = { has_cultural_pillar = heritage_chinese }
+			government_has_flag = government_is_celestial
+			OR = {
+				highest_held_title_tier >= tier_kingdom
+				AND = {
+					is_legion_government_trigger = yes
+				}
+				AND = {
+					is_independent_ruler = yes
+					highest_held_title_tier = tier_duchy
+				}
+			}
+		}
+		scope:recipient = {
+			holds_landed_title = yes
+			is_vassal_of = scope:actor
+			has_realm_law = official_succession_law
+			is_bureau_government_trigger = no
+		}
+	}
+	is_valid = {
+
+	}
+	on_accept = {
+		scope:actor = {
+			trigger_event = change_vassal_heir_succession.01
+			show_as_tooltip = {
+				scope:recipient = {
+					add_realm_law_skip_effects = legion_succession_law
+				}
+			}
+		}
+	}
+	cooldown_against_recipient = { years = 2 } 
+	ai_accept = {
+		base = 50
+		modifier = {
+		add = 20
+		trigger_if = {
+			limit = {
+				scope:recipient.dynasty ?= {
+					any_dynasty_member = {
+						count >= 10
+						is_alive = yes
+					}
+				}
+			}
+			always = yes
+		}
+		desc = TEN_ALIVE_DYNASTY_MEMBER
+	}
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 1.0
+			desc = AI_OPINION_REASON
+		}
+		modifier = {
+			add = 30
+			scope:recipient = {
+				is_powerful_vassal = yes
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = -20
+			scope:recipient = {
+				is_councillor = yes
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = -30
+			scope:actor = {
+				OR = {
+					has_focus_stewardship = yes
+					has_focus_learning = yes
+				}
+			}
+		}
+		# Government modifiers
+		modifier = {
+			add = 20
+			scope:actor = {
+				government_has_flag = government_is_celestial
+			}
+			desc = LIEGE_IS_IMPERIAL_REASON
+		}
+		modifier = {
+			add = 20
+			scope:recipient = {
+				government_has_flag = government_is_feudal
+			}
+			desc = VASSAL_IS_FEUDAL_REASON
+		}
+		modifier = {
+			add = -50
+			scope:recipient = {
+				government_has_flag = government_is_bureau
+			}
+			desc = VASSAL_IS_BUREAU_REASON
+		}
+		modifier = {
+			scope:hook = yes
+			add = 30
+			desc = SCHEME_WEAK_HOOK_USED
+		}
+	}
+	ai_will_do = {
+		base = 10
+	}
+	auto_accept = {
+		OR = {
+			scope:recipient = {
+				is_imprisoned_by = scope:actor
+			}
+			custom_description = {
+				text = "spending_hook"
+				subject = scope:actor
+				object = scope:recipient
+				scope:hook = yes
+				scope:actor = { has_strong_hook = scope:recipient }
+			}
+		}
+	}
+	send_option = {
+		is_valid = {
+			scope:actor = {
+				has_usable_hook = scope:recipient
+			}
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+	send_options_exclusive = no
+}
+
+
+
+#转为律令制
+#官阶升降

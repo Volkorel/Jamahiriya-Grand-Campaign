@@ -1,0 +1,2310 @@
+﻿# Coat of Arms events
+namespace = miaohao
+miaohao.1 = {
+	#议定庙号
+	type = character_event
+	title = death_miaohao.001.title
+	desc = death_miaohao.001.desc
+	theme = death
+	left_portrait = {
+		character = root
+	}
+	right_portrait = {
+		character = scope:death_man
+	}
+	trigger = {
+		is_oe_imperial_court_trigger = yes
+		exists = scope:death_man
+		scope:death_man = {
+			NOR = {
+				has_trait = miaohao_trait_gaozu
+				has_trait = miaohao_trait_taizu
+				has_trait = miaohao_trait_shizu
+			}
+			OR = {
+				primary_title.tier >= tier_kingdom
+				has_trait = shanghuang
+			}
+			OR = {
+				culture = {
+					has_cultural_pillar = heritage_chinese
+				}
+				culture = {
+					has_cultural_pillar = heritage_mongolic
+				}
+				culture = {
+					has_cultural_pillar = heritage_turkic
+				}
+				culture = {
+					has_cultural_pillar = heritage_iranian
+				}
+				culture = {
+					has_cultural_pillar = heritage_nanman
+				}
+				culture = {
+					has_cultural_pillar = heritage_tunguse
+				}
+				culture = {
+					has_cultural_pillar = heritage_goryeo
+				}
+				culture = {
+					has_cultural_pillar = heritage_yues
+				}
+			}
+		}
+	}
+	immediate = {
+		add_character_flag = {
+			flag = had_nickname_event
+		}
+	}
+	option = {
+		#太祖
+		name = death_miaohao.001.taizu
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_taizu
+					}
+				}
+				OR = {
+					has_trait = founding_monarch
+					has_trait = greatest_of_khans
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_taizu
+			house = {
+				set_variable = {
+					name = miaohao_variable_taizu
+					value = scope:death_man
+				}
+			}
+			remove_trait = founding_monarch
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = {
+		#世祖
+		name = death_miaohao.001.shizu
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_shizu
+					}
+				}
+				OR = {
+					has_trait = restoration_monarch
+					AND = {
+						has_trait = founding_monarch
+						any_held_title = {
+							count = 2
+							tier = tier_empire
+						}
+					}
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_shizu
+			house = {
+				set_variable = {
+					name = miaohao_variable_shizu
+					value = scope:death_man
+				}
+			}
+			remove_trait = restoration_monarch
+		}
+		ai_chance = {
+			base = 1000
+		}
+	}
+	option = {
+		#anzong
+		name = death_miaohao.001.a
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_anzong
+					}
+				}
+				OR = {
+					has_trait = craven
+					has_trait = content
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_anzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_anzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#aizong
+		name = death_miaohao.001.b
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_aizong
+					}
+				}
+				age <= 18
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_aizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_aizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#chengzong
+		name = death_miaohao.001.c
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_chengzong
+					}
+				}
+				OR = {
+					has_trait = content
+					has_trait = patient
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_chengzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_chengzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#chunzong
+		name = death_miaohao.001.e
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_chunzong
+					}
+				}
+				OR = {
+					has_trait = scholar
+					has_trait = honest
+					has_trait = trusting
+					has_trait = education_stewardship_1
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_chunzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_chunzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#daizong
+		name = death_miaohao.001.f
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_daizong
+					}
+				}
+				OR = {
+					has_trait = child_of_concubine_male
+					has_trait = family_first
+					has_trait = bastard
+					has_trait = child_of_concubine
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_daizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_daizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#daizong1
+		name = death_miaohao.001.g
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_daizong1
+					}
+				}
+				OR = {
+					has_trait = education_stewardship_2
+					has_trait = just
+					has_trait = compassionate
+					has_trait = forgiving
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_daizong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_daizong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#daozong
+		name = death_miaohao.001.h
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_daozong
+					}
+				}
+				OR = {
+					has_trait = trusting
+					has_trait = content
+					has_trait = calm
+					has_trait = improvident
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_daozong
+			house = {
+				set_variable = {
+					name = miaohao_variable_daozong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#dezong
+		name = death_miaohao.001.i
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_dezong
+					}
+				}
+				OR = {
+					has_trait = ambitious
+					has_trait = diligent
+					has_trait = trusting
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_dezong
+			house = {
+				set_variable = {
+					name = miaohao_variable_dezong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#dingzong
+		name = death_miaohao.001.j
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_dingzong
+					}
+				}
+				OR = {
+					has_trait = stubborn
+					has_trait = arbitrary
+					has_trait = callous
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_dingzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_dingzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#duzong
+		name = death_miaohao.001.k
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_duzong
+					}
+				}
+				OR = {
+					has_trait = content
+					has_trait = lustful
+					has_trait = lazy
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_duzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_duzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#duanzong
+		name = death_miaohao.001.l
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_duanzong
+					}
+				}
+				OR = {
+					has_trait = infirm
+					has_trait = humble
+					age <= 20
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_duanzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_duanzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#gaozong
+		name = death_miaohao.001.m
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_gaozong
+					}
+				}
+				OR = {
+					has_trait = generous
+					has_trait = stubborn
+					has_trait = arbitrary
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_gaozong
+			house = {
+				set_variable = {
+					name = miaohao_variable_gaozong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#gongzong
+		name = death_miaohao.001.n
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_gongzong
+					}
+				}
+				OR = {
+					has_trait = compassionate
+					has_trait = education_learning_3
+					has_trait = gregarious
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_gongzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_gongzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#guangzong
+		name = death_miaohao.001.o
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_guangzong
+					}
+				}
+				OR = {
+					has_trait = craven
+					has_trait = fickle
+					has_trait = paranoid
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_guangzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_guangzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#huaizong
+		name = death_miaohao.001.p
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_huaizong
+					}
+				}
+				OR = {
+					has_trait = education_stewardship_2
+					age <= 20
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_huaizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_huaizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#hengzong
+		name = death_miaohao.001.q
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_hengzong
+					}
+				}
+				OR = {
+					has_trait = impatient
+					has_trait = education_diplomacy_1
+					has_trait = education_martial_2
+					has_trait = education_martial_prowess_2
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_hengzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_hengzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#huizong
+		name = death_miaohao.001.r
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_huizong
+					}
+				}
+				OR = {
+					has_trait = fecund
+					has_trait = scholar
+					has_trait = craven
+					this = character:217728
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_huizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_huizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#huizong1
+		name = death_miaohao.001.s
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_huizong1
+					}
+				}
+				OR = {
+					has_trait = architect
+					has_trait = lifestyle_mystic
+					has_trait = shy
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_huizong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_huizong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#jianzong
+		name = death_miaohao.001.t
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_jianzong
+					}
+				}
+				OR = {
+					age <= 15
+					has_trait = sickly
+					has_trait = physique_bad_2
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_jianzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_jianzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#jingzong
+		name = death_miaohao.001.u
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_jingzong
+					}
+				}
+				OR = {
+					has_trait = deceitful
+					has_trait = callous
+					has_trait = brave
+					has_trait = vengeful
+					has_trait = kinslayer_1
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_jingzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_jingzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#jinzong
+		name = death_miaohao.001.v
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_jinzong
+					}
+				}
+				OR = {
+					has_trait = gregarious
+					has_trait = gluttonous
+					has_trait = lifestyle_hunter
+					has_trait = lifestyle_reveler
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_jinzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_jinzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#jinzong1
+		name = death_miaohao.001.w
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_jinzong1
+					}
+				}
+				OR = {
+					has_trait = diplomat
+					has_trait = education_diplomacy_4
+					has_trait = administrator
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_jinzong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_jinzong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#kangzong
+		name = death_miaohao.001.x
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_kangzong
+					}
+				}
+				OR = {
+					has_trait = avaricious
+					has_trait = greedy
+					has_trait = arrogant
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_kangzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_kangzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#lizong
+		name = death_miaohao.001.y
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_lizong
+					}
+				}
+				OR = {
+					has_trait = sickly
+					has_trait = physique_bad_1
+					has_trait = physique_bad_2
+					has_trait = weak
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_lizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_lizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#lizong1
+		name = death_miaohao.001.z
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_lizong1
+					}
+				}
+				OR = {
+					has_trait = lifestyle_mystic
+					has_trait = diligent
+					has_trait = zealous
+					has_trait = compassionate
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_lizong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_lizong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#liezong
+		name = death_miaohao.001.a1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_liezong
+					}
+				}
+				OR = {
+					has_trait = ambitious
+					has_trait = cynical
+					has_trait = beauty_good_2
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_liezong
+			house = {
+				set_variable = {
+					name = miaohao_variable_liezong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#mingzong
+		name = death_miaohao.001.b1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_mingzong
+					}
+				}
+				OR = {
+					has_trait = shrewd
+					has_trait = administrator
+					has_trait = forgiving
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_mingzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_mingzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#muzong
+		name = death_miaohao.001.c1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_muzong
+					}
+				}
+				AND = {
+					has_trait = just
+					age <= 40
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_muzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_muzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#ningzong
+		name = death_miaohao.001.d1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_ningzong
+					}
+				}
+				OR = {
+					has_trait = temperate
+					has_trait = humble
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_ningzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_ningzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#qingzong
+		name = death_miaohao.001.e1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_qingzong
+					}
+				}
+				OR = {
+					has_trait = fickle
+					has_trait = physique_bad_1
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_qingzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_qingzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#renzong
+		name = death_miaohao.001.f1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_renzong
+					}
+				}
+				OR = {
+					has_trait = generous
+					has_trait = diligent
+					has_trait = compassionate
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_renzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_renzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#ruizong
+		name = death_miaohao.001.g1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_ruizong
+					}
+				}
+				OR = {
+					has_trait = family_first
+					has_trait = whole_of_body
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_ruizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_ruizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#shaozong
+		name = death_miaohao.001.h1
+		trigger = {
+			OR = {
+				scope:death_man = {
+					house = {
+						NOT = {
+							has_variable = miaohao_variable_shaozong
+						}
+					}
+					OR = {
+						has_trait = gallant
+						has_trait = temperate
+					}
+				}
+				root = {
+					AND = {
+						house = {
+							NOT = {
+								has_variable = miaohao_variable_shaozong
+							}
+						}
+						sub_realm_size < 40
+					}
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_shaozong
+			house = {
+				set_variable = {
+					name = miaohao_variable_shaozong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#shenzong
+		name = death_miaohao.001.i1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_shenzong
+					}
+				}
+				OR = {
+					has_trait = diligent
+					has_trait = ambitious
+					has_trait = fickle
+					has_trait = avaricious
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_shenzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_shenzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#shengzong
+		name = death_miaohao.001.j1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_shengzong
+					}
+				}
+				OR = {
+					has_trait = theologian
+					has_trait = education_stewardship_4
+					has_trait = diligent
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_shengzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_shengzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#shizong
+		name = death_miaohao.001.k1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_shizong
+					}
+				}
+				OR = {
+					has_trait = ambitious
+					has_trait = brave
+					has_trait = strategist
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_shizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_shizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#sizong
+		name = death_miaohao.001.l1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+					has_variable = miaohao_variable_sizong
+					}
+				}
+				has_trait = diligent
+				age <= 34
+			}
+			root = {
+				sub_realm_size <= 30
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_sizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_sizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#shunzong
+		name = death_miaohao.001.m1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_shunzong
+					}
+				}
+				OR = {
+					has_trait = calm
+					has_trait = patient
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_shunzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_shunzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#suzong
+		name = death_miaohao.001.n1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_suzong
+					}
+				}
+				OR = {
+					has_trait = beauty_good_3
+					has_trait = organizer
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_suzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_suzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#taizong
+		name = death_miaohao.001.o1
+		trigger = {
+			house = {
+				NOT = {
+					has_variable = miaohao_variable_taizong
+				}
+			}
+			OR = {
+				scope:death_man = {
+					AND = {
+						has_trait = diligent
+						#has_trait = just
+						has_trait = ambitious
+						has_trait = administrator
+					}
+				}
+				scope:death_man = {
+					OR = {
+						AND = {
+							has_father = yes
+							father = {
+								has_trait = founding_monarch
+							}
+						}
+						primary_title.previous_holder = {
+							has_trait = founding_monarch
+						}
+						this = character:217722
+					}
+				}
+				root = {
+					sub_realm_size >= 70
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_taizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_taizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = {
+		#weizong
+		name = death_miaohao.001.p1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_weizong
+					}
+				}
+				OR = {
+					has_trait = lifestyle_reveler
+					has_trait = seducer
+					has_trait = lustful
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_weizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_weizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#wenzong
+		name = death_miaohao.001.q1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_wenzong
+					}
+				}
+				OR = {
+					has_trait = diligent
+					has_trait = craven
+					has_trait = humble
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_wenzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_wenzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#wuzong
+		name = death_miaohao.001.r1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_wuzong
+					}
+				}
+				OR = {
+					has_trait = education_martial_3
+					has_trait = education_martial_4
+					has_trait = education_martial_prowess_4
+					has_trait = education_martial_prowess_3
+				}
+				OR = {
+					has_trait = brave
+					has_trait = strong
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_wuzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_wuzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xizong
+		name = death_miaohao.001.s1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xizong
+					}
+				}
+				OR = {
+					has_trait = chaste
+					has_trait = gluttonous
+					has_trait = reclusive
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_xizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xizong1
+		name = death_miaohao.001.t1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xizong1
+					}
+				}
+				OR = {
+					has_trait = family_first
+					has_trait = content
+					has_trait = trusting
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xizong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_xizong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xizong2
+		name = death_miaohao.001.u1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xizong2
+					}
+				}
+				OR = {
+					has_trait = intellect_good_3
+					has_trait = lifestyle_reveler
+					has_trait = greedy
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xizong2
+			house = {
+				set_variable = {
+					name = miaohao_variable_xizong2
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xianzong
+		name = death_miaohao.001.v1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xianzong
+					}
+				}
+				OR = {
+					has_trait = diligent
+					has_trait = wrathful
+					has_trait = administrator
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xianzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_xianzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xianzong1
+		name = death_miaohao.001.w1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xianzong1
+					}
+				}
+				OR = {
+					has_trait = diplomat
+					has_trait = diligent
+					has_trait = patient
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xianzong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_xianzong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xianzong2
+		name = death_miaohao.001.x1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xianzong2
+					}
+				}
+				has_trait = craven
+			}
+			root = {
+				sub_realm_size < 50
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xianzong2
+			house = {
+				set_variable = {
+					name = miaohao_variable_xianzong2
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xiangzong
+		name = death_miaohao.001.y1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xiangzong
+					}
+				}
+				OR = {
+					has_trait = deceitful
+					has_trait = greedy
+					has_trait = arbitrary
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xiangzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_xiangzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xiaozong
+		name = death_miaohao.001.z1
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xiaozong
+					}
+				}
+				OR = {
+					has_trait = chaste
+					has_trait = temperate
+					has_trait = just
+					has_trait = family_first
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xiaozong
+			house = {
+				set_variable = {
+					name = miaohao_variable_xiaozong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xingzong
+		name = death_miaohao.001.x2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xingzong
+					}
+				}
+				OR = {
+					has_trait = gregarious
+					has_trait = diligent
+					has_trait = generous
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xingzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_xingzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xuanzong
+		name = death_miaohao.001.a2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_xuanzong
+					}
+				}
+				OR = {
+					has_trait = diligent
+					has_trait = just
+				}
+				has_trait = whole_of_body
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xuanzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_xuanzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#xuanzong1
+		name = death_miaohao.001.b2
+		trigger = {
+			scope:death_man = {
+				AND = {
+					house = {
+						NOT = {
+							has_variable = miaohao_variable_xuanzong1
+						}
+					}
+					OR = {
+						has_trait = diligent
+						has_trait = just
+					}
+					has_trait = arrogant
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_xuanzong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_xuanzong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#yizong
+		name = death_miaohao.001.c2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yizong
+					}
+				}
+				OR = {
+					has_trait = calm
+					has_trait = generous
+				}
+				has_trait = education_martial_4
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yizong
+			house = {
+				set_variable = {
+					name = miaohao_variable_yizong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#yizong1
+		name = death_miaohao.001.d2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yizong1
+					}
+				}
+				OR = {
+					has_trait = strategist
+					has_trait = scholar
+					has_trait = flagellant
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yizong1
+			house = {
+				set_variable = {
+					name = miaohao_variable_yizong1
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#yizong2
+		name = death_miaohao.001.e2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yizong2
+					}
+				}
+				OR = {
+					has_trait = beauty_good_3
+					has_trait = physique_good_3
+					has_trait = intellect_good_3
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yizong2
+			house = {
+				set_variable = {
+					name = miaohao_variable_yizong2
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#yizong3
+		name = death_miaohao.001.f2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yizong3
+					}
+				}
+				OR = {
+					this = character:longxi_li_1036
+					has_trait = lustful
+					has_trait = drunkard
+					has_trait = lifestyle_reveler
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yizong3
+			house = {
+				set_variable = {
+					name = miaohao_variable_yizong3
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 1000
+				this = character:longxi_li_1036
+			}
+		}
+	}
+	option = {
+		#yingzong
+		name = death_miaohao.001.g2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yingzong
+					}
+				}
+				OR = {
+					has_trait = gregarious
+					has_trait = diligent
+					has_trait = generous
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yingzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_yingzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#yuzong
+		name = death_miaohao.001.h2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yuzong
+					}
+				}
+				OR = {
+					has_trait = fickle
+					has_trait = diligent
+					has_trait = zealous
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yuzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_yuzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#yuanzong
+		name = death_miaohao.001.i2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_yuanzong
+					}
+				}
+				OR = {
+					has_trait = vengeful
+					has_trait = scholar
+					has_trait = greedy
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_yuanzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_yuanzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#zhangzong
+		name = death_miaohao.001.j2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_zhangzong
+					}
+				}
+				OR = {
+					has_trait = just
+					has_trait = honest
+					has_trait = forgiving
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_zhangzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_zhangzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#zhaozong
+		name = death_miaohao.001.k2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_zhaozong
+					}
+				}
+				OR = {
+					has_trait = ambitious
+					has_trait = impatient
+					has_trait = gallant
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_zhaozong
+			house = {
+				set_variable = {
+					name = miaohao_variable_zhaozong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#zhezong
+		name = death_miaohao.001.l2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_zhezong
+					}
+				}
+				OR = {
+					has_trait = just
+					has_trait = humble
+					has_trait = infirm
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_zhezong
+			house = {
+				set_variable = {
+					name = miaohao_variable_zhezong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#zhenzong
+		name = death_miaohao.001.m2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_zhenzong
+					}
+				}
+				OR = {
+					has_trait = trusting
+					has_trait = zealous
+					has_trait = theologian
+				}
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_zhenzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_zhenzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#zhongzong
+		name = death_miaohao.001.n2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_zhongzong
+					}
+				}
+				OR = {
+					has_trait = patient
+					has_trait = just
+					has_trait = temperate
+				}
+				has_trait = administrator
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_zhongzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_zhongzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		#zhuangzong
+		name = death_miaohao.001.o2
+		trigger = {
+			scope:death_man = {
+				house = {
+					NOT = {
+						has_variable = miaohao_variable_zhuangzong
+					}
+				}
+				OR = {
+					has_trait = strategist
+					has_trait = callous
+					has_trait = greedy
+				}
+				has_trait = education_martial_4
+			}
+		}
+		scope:death_man = {
+			add_trait = miaohao_trait_zhuangzong
+			house = {
+				set_variable = {
+					name = miaohao_variable_zhuangzong
+					value = scope:death_man
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+miaohao.2 = {
+	#追封庙号
+	type = character_event
+	title = death_miaohao.002.title
+	desc = death_miaohao.002.desc
+	theme = death
+	left_portrait = {
+		character = root
+	}
+	right_portrait = root.father
+	immediate = {
+	}
+	option = {
+		#太祖
+		name = death_miaohao.001.taizu
+		father = {
+			add_trait = miaohao_trait_taizu
+			house = {
+				set_variable = {
+					name = miaohao_variable_taizu
+					value = scope:death_man
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = {
+		#世祖
+		name = death_miaohao.001.shizu
+		father = {
+			add_trait = miaohao_trait_shizu
+			house = {
+				set_variable = {
+					name = miaohao_variable_shizu
+					value = scope:death_man
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = {
+		#高祖
+		name = death_miaohao.001.a
+		father = {
+			add_trait = miaohao_trait_gaozu
+			house = {
+				set_variable = {
+					name = miaohao_variable_gaozu
+					value = scope:death_man
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
