@@ -1,0 +1,347 @@
+﻿# Uyghur
+Yaghlakar_00 = { #吐迷度
+	name = "Tumidu"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+	
+	#Birth date unknown
+	594.1.1 = {
+		birth = yes
+	}
+	648.1.1 = {
+		death = yes
+	}
+}
+Yaghlakar_01 = { #婆闰
+	name = "Porun"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+
+	father = Yaghlakar_00
+	#Birth date unknown
+	610.1.1 = {
+		birth = yes
+	}
+	661.1.1 = {
+		death = yes
+	}
+}
+Yaghlakar_02 = { #比栗
+	name = "Billi"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+
+	father = Yaghlakar_01
+	#Birth date unknown
+	629.1.1 = {
+		birth = yes
+	}
+	680.1.1 = {
+		death = yes
+	}
+}
+Yaghlakar_03 = { #独解支
+	name = "Dujiezhi"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+
+	father = Yaghlakar_02
+	#Birth date unknown
+	646.1.1 = {
+		birth = yes
+	}
+	715.1.1 = {
+		death = yes
+	}
+}
+Yaghlakar_04 = { #伏帝匐
+	name = "Fudifu"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+
+	father = Yaghlakar_03
+	#Birth date unknown
+	663.1.1 = {
+		birth = yes
+	}
+	719.1.1 = {
+		death = yes
+	}
+}
+Yaghlakar_05 = { #承宗，骨力裴罗之父
+	name = "Chengzong"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+
+	father = Yaghlakar_04
+	#Birth date unknown
+	681.1.1 = {
+		birth = yes
+	}
+	727.1.1 = {
+		death = yes
+	}
+}
+Yaghlakar_06 = { #伏帝难，骨力裴罗之兄
+	name = "Fudinan"
+	dynasty = 1042190 # Yaghlakar
+	religion = tengri_pagan
+	culture = uyghur
+
+	father = Yaghlakar_05
+	#Birth date unknown
+	699.1.1 = {
+		birth = yes
+	}
+	741.1.1 = {
+		death = yes
+	}
+}
+
+
+## Khitan & Mongol
+
+khitan0010 = { #耶律速撒 Yelu Susa
+	dynasty = 1000102400
+	name = "Susa_name" 
+	culture = khitan
+	religion = mahayana
+
+	#birth and death dates unknown
+	926.1.1 = {
+		birth = yes
+	}
+	986.1.1 = {
+		death = yes
+	}
+}
+
+khitan0011 = { #蕭图玉 Xiao Tuyu, courtesy name 特免 Temian. 右夷離畢 until 1068.7.27, on that day made 中京留守. (遼史/卷22)
+	dynasty = 1000049119 #Guojiu Siau
+	name = "Tuyu_name2" 
+	culture = khitan
+	religion = mahayana
+	
+	father = 1413904 #unknown but possible
+	#birth and death dates unknown
+	984.1.1 = {
+		birth = yes
+	}
+	1001.1.1 = { add_spouse = 1413101 }
+	1043.1.1 = {
+		death = yes
+	}
+}
+
+
+jubu02 = {
+	name="Buyan"  #
+	religion=tengri_pagan
+	culture=yughur
+	dynasty=1051138  #拔野古
+	857.1.1={
+		birth=yes
+	}
+	901.1.1={
+		death=yes
+	}
+}
+
+jubu03 = {
+	name="BulmI_sh"  #
+	religion=tengri_pagan
+	culture=ongud
+	dynasty=kh.8 #仆固
+	825.1.1={
+		birth=yes
+	}
+	900.1.1={
+		death=yes
+	}
+}
+
+
+
+#白鞑靼代持
+jubu04 = {
+	name="Itinqt"  #逸隐啜，回鹘前国相
+	religion=nestorian
+	culture=ongud
+	dynasty=kh.9 #
+	825.1.1={
+		birth=yes
+	}
+	908.1.1={
+		death=yes
+	}
+}
+
+jubu06 = {
+	name="Kurd"  #
+	religion=tengri_pagan
+	culture=yughur
+	dynasty=kh.10 #白霫
+	856.1.1={
+		birth=yes
+	}
+	900.1.1={
+		death=yes
+	}
+}
+
+
+siber01 = {
+	name="Munglig"
+	religion=tengri_pagan
+	culture=tartar
+	dynasty=kh.6
+	855.1.1={
+		birth=yes
+	}
+	910.1.1={
+		death=yes
+	}
+}
+
+
+siber02 = {
+	name="Dilu_name"  #
+	religion=tengri_pagan
+	culture=tartar
+	dynasty=1000049206  #敌烈/塔塔儿
+	847.1.1={
+		birth=yes
+	}
+	910.1.1={
+		death=yes
+	}
+}
+
+
+siber03 = {
+	name="Uguei"  #
+	religion=tengri_pagan
+	culture=mongol
+	dynasty=1041000 #羽厥/乌古/弘吉剌
+	845.1.1={
+		birth=yes
+	}
+	870.1.1={
+		death=yes
+	}
+}
+
+siber10 = {
+	name = "Uguei"
+	dynasty = 1041000
+
+	religion = "tengri_pagan"
+	culture = "mongol"
+	1120.1.1 = {
+		birth = yes
+	}
+	1200.1.1 = {
+		death = yes
+	}
+}
+
+jubu05 = {
+	name="Ulhu"  #
+	religion=tengri_pagan
+	culture=mongol
+	dynasty=1000049203 #札剌亦儿
+	845.1.1={
+		birth=yes
+	}
+	908.1.1={
+		death=yes
+	}
+}
+
+# Jurchen & Balhae
+
+bohai09 = {
+	name="Baode" 
+	dynasty=go00  #高
+	religion=mahayana
+	culture=goguryeo
+	851.8.1 = {
+		birth = yes
+	}
+	907.9.19 = {
+		death = yes
+	}
+}
+
+### 1121 Placeholders ###
+
+daur11 = {
+	name="Khabichi"
+	religion=shaman
+	culture=siber
+	dynasty=7371
+	1080.1.1={
+		birth=yes
+	}
+	1141.1.1={
+		death=yes
+	}
+}
+
+daur12 = {
+	name="Ahaibaifu"
+	religion=shaman
+	culture=udege
+	dynasty=udege_1
+	1080.1.1={
+		birth=yes
+	}
+	1141.1.1={
+		death=yes
+	}
+}
+
+daur13 = {
+	name="S_I_langha"
+	religion=shaman
+	culture=uilta
+	dynasty=udege_2
+	1080.1.1={
+		birth=yes
+	}
+	1141.1.1={
+		death=yes
+	}
+}
+
+daur14 = {
+	name="Arikosan"
+	religion=ainu
+	culture=ainu
+	dynasty=udege_3
+	1080.1.1={
+		birth=yes
+	}
+	1141.1.1={
+		death=yes
+	}
+}
+
+daur15 = {
+	name="Irgyn"
+	religion=nivkh
+	culture=nivkh
+	dynasty=udege_4
+	1080.1.1={
+		birth=yes
+	}
+	1141.1.1={
+		death=yes
+	}
+}
